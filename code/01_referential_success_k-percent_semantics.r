@@ -52,26 +52,51 @@ get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, th
     
     tibble(tall_brown = ifelse(referent %in% tall_brown, 1/length(tall_brown), 0),
            brown_tall = ifelse(referent %in% brown_tall, 1/length(brown_tall), 0),
-           referent = referent)
+           referent = referent,
+           exception = tall_brown < brown_tall,
+           unique_tallbrown = length(which(tall_sp & brown_sp)) == 1)
     
-  }) %>% filter(! is.na(referent)) %>% 
-    gather(ordering, success, brown_tall, tall_brown) %>% 
+  }) %>% filter(! is.na(referent))
+  
+  outcomes_all = outcomes %>% 
+    gather(ordering, success_prob, brown_tall, tall_brown) %>% 
     group_by(ordering) %>% 
-    summarize(sum_success = sum(success),
-              eff_samples = n()) %>% # not all iterations give a data point:
+    summarize(context_types = "all", 
+              sum_success_prob = sum(success_prob),
+              eff_samples = n(),     # not all iterations give a data point:
                                      # we discard an iteration if it does not have any tall & brown object
+              sum_expections = sum(exception)) %>% 
     ungroup() %>% 
-    mutate(mean_success = sum_success / eff_samples,
+    mutate(mean_success = sum_success_prob / eff_samples,
+           proportion_exceptions = sum_expections / eff_samples,
            iterations = iterations,
            n_obj = n_obj, 
            sd_brown = paste0("sd_brown: ", sd_brown),
            sd_tall = paste0("sd_tall: ", sd_tall),
            theta = theta)
-  outcomes
+  
+  outcomes_uniqueContexts = outcomes %>% filter(unique_tallbrown == TRUE) %>% 
+    gather(ordering, success_prob, brown_tall, tall_brown) %>% 
+    group_by(ordering) %>% 
+    summarize(context_types = "unique", 
+              sum_success_prob = sum(success_prob),
+              eff_samples = n(),     # not all iterations give a data point:
+              # we discard an iteration if it does not have any tall & brown object
+              sum_expections = sum(exception)) %>% 
+    ungroup() %>% 
+    mutate(mean_success = sum_success_prob / eff_samples,
+           proportion_exceptions = sum_expections / eff_samples,
+           iterations = iterations,
+           n_obj = n_obj, 
+           sd_brown = paste0("sd_brown: ", sd_brown),
+           sd_tall = paste0("sd_tall: ", sd_tall),
+           theta = theta)
+  
+  rbind(outcomes_all, outcomes_uniqueContexts)
 }
 
 ## collect results in a tibble ::: 
-#### ideally, for each parameter tuple, "tall_brown" shoud have a higher mean_success than "brown_tall"
+#### ideally, for each parameter tuple, "tall_brown" should have a higher mean_success than "brown_tall"
 
 iterations = 5000
 results = rbind(
@@ -90,11 +115,11 @@ results = rbind(
 )
 show(results)
 
-results_plot = select(results, -sum_success) %>% spread(key = ordering, value = mean_success) %>% 
+results_plot = select(filter(results, context_types == "all"), -sum_success_prob) %>% spread(key = ordering, value = mean_success) %>%
   ggplot(aes(x = as.factor(n_obj), y = tall_brown - brown_tall, fill = as.factor(theta))) +
-  geom_bar(stat = "identity", position = "dodge") + facet_wrap(sd_brown ~ sd_tall) +
+  geom_bar(stat = "identity", position = "dodge") + facet_grid(sd_brown ~ sd_tall) +
   ylab("difference in mean success probability") +
-  xlab("number of objects in context")  + 
+  xlab("number of objects in context")  +
   scale_fill_brewer(palette="Dark2", name = "semantic threshold")
-  
+
 show(results_plot)
