@@ -25,6 +25,38 @@ Dixon, R\BPBI M\BPBI W.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Schmidt%
+, Goodman%
+, Barner%
+\BCBL {}\ \BBA {} Tenenbaum%
+}{%
+Schmidt%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+schmidtetal2009}
+\APACinsertmetastar {%
+schmidtetal2009}%
+\begin{APACrefauthors}%
+Schmidt, L\BPBI A.%
+, Goodman, N\BPBI D.%
+, Barner, D.%
+\BCBL {}\ \BBA {} Tenenbaum, J\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {How Tall Is \emph{tall}? {C}ompositionality, Statistics,
+  and Gradable Adjectives} {How tall is \emph{tall}? {C}ompositionality,
+  statistics, and gradable adjectives}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 31st annual conference of the
+  {Cognitive Science Society}.} {Proceedings of the 31st annual conference of
+  the {Cognitive Science Society}.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Scontras%
 , Degen%
 \BCBL {}\ \BBA {} Goodman%
