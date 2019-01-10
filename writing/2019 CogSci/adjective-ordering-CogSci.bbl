@@ -1,6 +1,58 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Barker%
+}{%
+Barker%
+}{%
+{\protect \APACyear {2013}}%
+}]{%
+barker2013}
+\APACinsertmetastar {%
+barker2013}%
+\begin{APACrefauthors}%
+Barker, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Negotiating Taste}} {{Negotiating Taste}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Inquiry}{56}{2-3}{240--257}.
+\newblock
+\begin{APACrefDOI} \doi{10.1080/0020174X.2013.784482} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Cinque%
+}{%
+Cinque%
+}{%
+{\protect \APACyear {1994}}%
+}]{%
+cinque1994}
+\APACinsertmetastar {%
+cinque1994}%
+\begin{APACrefauthors}%
+Cinque, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1994}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {On the Evidence for Partial {N}-Movement in the Romance
+  {DP}} {On the evidence for partial {N}-movement in the romance {DP}}.{\BBCQ}
+\newblock
+\BIn{} R.~Kayne, G.~Cinque, J.~Koster, J\BHBI Y.~Pollock, L.~Rizzi\BCBL {}\
+  \BBA {} R.~Zanuttini\ (\BEDS), \APACrefbtitle {Paths Towards {Universal
+  Grammar}. {S}tudies in Honor of {Richard S. Kayne}} {Paths towards {Universal
+  Grammar}. {S}tudies in honor of {Richard S. Kayne}}\ (\BPGS\ 85--110).
+\newblock
+\APACaddressPublisher{Washington DC}{Georgetown University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Dixon%
 }{%
 Dixon%
@@ -22,6 +74,215 @@ Dixon, R\BPBI M\BPBI W.%
   in semantics and syntax}}.
 \newblock
 \APACaddressPublisher{Berlin}{Mouton}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Hetzron%
+}{%
+Hetzron%
+}{%
+{\protect \APACyear {1978}}%
+}]{%
+hetzron1978}
+\APACinsertmetastar {%
+hetzron1978}%
+\begin{APACrefauthors}%
+Hetzron, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1978}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{On the relative order of adjectives}} {{On the relative
+  order of adjectives}}.{\BBCQ}
+\newblock
+\BIn{} H.~Seiler\ (\BED), \APACrefbtitle {Language Universals} {Language
+  universals}\ (\BPGS\ 165--184).
+\newblock
+\APACaddressPublisher{T{\"{u}}bingen}{Narr}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Hill%
+}{%
+Hill%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+hill2012}
+\APACinsertmetastar {%
+hill2012}%
+\begin{APACrefauthors}%
+Hill, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Beauty Before Age? {A}pplying Subjectivity to Automatic
+  English Adjective Ordering} {Beauty before age? {A}pplying subjectivity to
+  automatic english adjective ordering}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {{NAACL HLT 2012 Student Research Workshop}} {{NAACL HLT
+  2012 Student Research Workshop}}\ (\BPGS\ 11--16).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kennedy%
+}{%
+Kennedy%
+}{%
+{\protect \APACyear {2013}}%
+}]{%
+kennedy2013}
+\APACinsertmetastar {%
+kennedy2013}%
+\begin{APACrefauthors}%
+Kennedy, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Two Sources of Subjectivity: Qualitative Assessment and
+  Dimensional Uncertainty} {Two sources of subjectivity: Qualitative assessment
+  and dimensional uncertainty}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Inquiry}{56}{2-3}{258--277}.
+\newblock
+\begin{APACrefURL}
+  \url{http://www.tandfonline.com/doi/abs/10.1080/0020174X.2013.784483}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1080/0020174X.2013.784483} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+K{\"{o}}lbel%
+}{%
+K{\"{o}}lbel%
+}{%
+{\protect \APACyear {2004}}%
+}]{%
+kolbel2004}
+\APACinsertmetastar {%
+kolbel2004}%
+\begin{APACrefauthors}%
+K{\"{o}}lbel, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Faultless Disagreement}} {{Faultless
+  Disagreement}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Proceedings of the Aristotelian
+  Society}{104}{}{53--73}.
+\newblock
+\begin{APACrefDOI} \doi{10.1111/j.0066-7373.2004.00081.x} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+MacFarlane%
+}{%
+MacFarlane%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+macfarlane2014}
+\APACinsertmetastar {%
+macfarlane2014}%
+\begin{APACrefauthors}%
+MacFarlane, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2014}.
+\newblock
+\APACrefbtitle {{Assessment Sensitivity}} {{Assessment Sensitivity}}.
+\newblock
+\APACaddressPublisher{Oxford}{Clarendon Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Martin%
+}{%
+Martin%
+}{%
+{\protect \APACyear {1969}}%
+}]{%
+martin1969}
+\APACinsertmetastar {%
+martin1969}%
+\begin{APACrefauthors}%
+Martin, J\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1969}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Semantic determinants of preferred adjective order}
+  {Semantic determinants of preferred adjective order}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Verbal Learning and Verbal
+  Behavior}{8}{}{697--704}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+McNally%
+\ \BBA {} Boleda%
+}{%
+McNally%
+\ \BBA {} Boleda%
+}{%
+{\protect \APACyear {2004}}%
+}]{%
+mcnallyboleda2004}
+\APACinsertmetastar {%
+mcnallyboleda2004}%
+\begin{APACrefauthors}%
+McNally, L.%
+\BCBT {}\ \BBA {} Boleda, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Relational adjectives as properties of kinds}}
+  {{Relational adjectives as properties of kinds}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Empirical Issues in Formal Syntax and
+  Semantics}{5}{}{179--196}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Quirk%
+, Greenbaum%
+, Leech%
+\BCBL {}\ \BBA {} Svartvik%
+}{%
+Quirk%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1985}}%
+}]{%
+quirketal1985}
+\APACinsertmetastar {%
+quirketal1985}%
+\begin{APACrefauthors}%
+Quirk, R.%
+, Greenbaum, S.%
+, Leech, G.%
+\BCBL {}\ \BBA {} Svartvik, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1985}{}{}.
+\newblock
+\APACrefbtitle {{A Comprehensive Grammar of the English Language}.} {{A
+  Comprehensive Grammar of the English Language}.}
+\newblock
+\APACaddressPublisher{London}{Longmans}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -115,6 +376,35 @@ Scontras, G.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Scott%
+}{%
+Scott%
+}{%
+{\protect \APACyear {2002}}%
+}]{%
+scott2002}
+\APACinsertmetastar {%
+scott2002}%
+\begin{APACrefauthors}%
+Scott, G\BHBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2002}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Stacked adjectival modification and the structure of
+  nominal phrases}} {{Stacked adjectival modification and the structure of
+  nominal phrases}}.{\BBCQ}
+\newblock
+\BIn{} G.~Cinque\ (\BED), \APACrefbtitle {{The cartography of syntactic
+  structures, Volume 1: Functional structure in the DP and IP}} {{The
+  cartography of syntactic structures, Volume 1: Functional structure in the DP
+  and IP}}\ (\BPGS\ 91--120).
+\newblock
+\APACaddressPublisher{Oxford}{Oxford University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Simoni\v{c}%
 }{%
 Simoni\v{c}%
@@ -139,6 +429,102 @@ Simoni\v{c}, M.%
 \unskip\
 \newblock
 \APACaddressSchool {}{University of T\"{u}bingen}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Truswell%
+}{%
+Truswell%
+}{%
+{\protect \APACyear {2009}}%
+}]{%
+truswell2009}
+\APACinsertmetastar {%
+truswell2009}%
+\begin{APACrefauthors}%
+Truswell, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Attributive Adjectives and Nominal Templates}
+  {Attributive adjectives and nominal templates}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Linguistic Inquiry}{40}{}{525-533}.
+\newblock
+\begin{APACrefDOI} \doi{10.1162/ling.2009.40.3.525} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Tucker%
+}{%
+Tucker%
+}{%
+{\protect \APACyear {1998}}%
+}]{%
+tucker1998}
+\APACinsertmetastar {%
+tucker1998}%
+\begin{APACrefauthors}%
+Tucker, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1998}.
+\newblock
+\APACrefbtitle {The Lexicogrammar of Adjectives: A Systemic Functional Approach
+  to Lexis} {The lexicogrammar of adjectives: A systemic functional approach to
+  lexis}.
+\newblock
+\APACaddressPublisher{London}{Cassell Academic}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Whorf%
+}{%
+Whorf%
+}{%
+{\protect \APACyear {1945}}%
+}]{%
+whorf1945}
+\APACinsertmetastar {%
+whorf1945}%
+\begin{APACrefauthors}%
+Whorf, B\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1945}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Grammatical Categories}} {{Grammatical
+  Categories}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Language}{21}{1}{1--11}.
+\newblock
+\begin{APACrefDOI} \doi{10.2307/410199} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ziff%
+}{%
+Ziff%
+}{%
+{\protect \APACyear {1960}}%
+}]{%
+ziff1960}
+\APACinsertmetastar {%
+ziff1960}%
+\begin{APACrefauthors}%
+Ziff, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1960}.
+\newblock
+\APACrefbtitle {{Semantic Analysis}} {{Semantic Analysis}}.
+\newblock
+\APACaddressPublisher{Ithaca, NY}{Cornell University Press}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
