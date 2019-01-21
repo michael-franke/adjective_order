@@ -1,4 +1,5 @@
 \documentclass[10pt,a4paper]{article}
+\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{tikz} % for drawing figures
 \usepackage{amsmath} % for equations
 \usepackage{url} % for URLs
@@ -16,8 +17,8 @@
 
 \newcommand{\sem}[1]{\mbox{$[\![$#1$]\!]$}}
 \newcommand{\lam}{$\lambda$}
-\newcommand{\gcs}[1]{\textcolor{blue}{[gcs: #1]}} 
-
+\newcommand{\gcs}[1]{\textcolor{Blue}{[gcs: #1]}} 
+\newcommand{\mf}[1]{\textcolor{BrickRed}{[mf: #1]}} 
 
 
 \title{Subjectivity-based adjective ordering maximizes the probability of successful reference resolution}
@@ -70,6 +71,29 @@ With this assumption, \citeauthor{scontrasetalSPadjectives} demonstrate how subj
 \paragraph{\citeA{schmidtetal2009}}
 
 \section{Model}
+
+In the following we use ``brown'' and ``big'' as mnemonic labels for any two adjectives that are, respectively, less and more subjective when compared against each other. Our goal is to demonstrate why an utterance of ``big brown $X$'' is communicatively more efficient on average than an utterance of ``brown big $X$''. Average communicative success is formalized as \emph{expected utility}, which is defined as the average probability of making the listener choose the intended referent.
+
+Figure~\ref{fig:ModelIllustration} gives a concrete example to illustrate the main idea. Suppose that speaker and listener share access to a context of four bags. Bags differ only with respect to two properties, color and size. However, speaker and listener might perceive or construe the context differently, maybe due to different perceptual angles, different background knowledge or previous experience. The speaker wants to describe an object based on her subjective representation of the context. Suppose she wants the listener to hand her bag 4, which is both brown and big according to the speaker. The speaker can then choose the referential phrase ``big brown bag'' or the referential phrase ``brown big bag''. The listener will interpret whatever the referential phrase based on his own subjective representation of the context. The listener's interpretation of either referential phrase determines the probability that, in this concrete context, the listener ends up with the correct interpretation (bag 4). The expected utility associated with ``big brown bag'' in general is the average chance of communicative success when we integrate over different pairs of speaker and listener representations of an actual context and their probability of occurring.
+
+\bigskip
+
+\mf{snippets}
+
+Assumptions:
+
+\begin{enumerate}
+\item subjectivity is intersubjective variability in feature representations
+\item adjectival modification is, at least sometimes, incrementallly intersective (following syntactic structure, not surface order)
+\item adjectives have, at least sometimes, a reading that is entirely or in part determined by the local context only (e.g., ``big in the context of the currently relevant/salient objects'')
+\end{enumerate}
+
+\bigskip
+
+If one property is more subjective than another, the first property is more likely, on average, to show bigger differences in the subjective representation between any two agents than the second property. For instance, the intersubjective variability of size perception would, on this account, be higher than that of color perception. \mf{I guess that we should motivate this, especially when we pick out the concrete case of color and size for illustration. Readers will jump on the example, rather than judge the setup in generality.}
+
+
+When we take the average amount of divergence between subjective representations and the resulting differential communicative success between ordering-variants into account, we see that, indeed, adjectives which pick out more subjective properties should indeed occur later in an incrementally interpreted referential noun phrase.
 
 \begin{figure}[t]
   \centering
