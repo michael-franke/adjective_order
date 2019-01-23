@@ -19,10 +19,18 @@ get_agent_representation = function(true_values, n_obj, sd_brown, sd_tall) {
   out
 }
 
+# get_truth_values = function(representation, theta) {
+#   out = rank(as.vector(representation)) > ceiling(length(representation) * theta)
+#   # at least the maximal element has the property in question
+#   if (sum(out) == 0) {out[which.max(as.vector(representation))] = TRUE} 
+#   names(out) = names(representation)
+#   out
+# }
+
 get_truth_values = function(representation, theta) {
-  out = rank(as.vector(representation)) > ceiling(length(representation) * theta)
+  out = representation > (max(representation) - min(representation) * theta) + min(representation)
   # at least the maximal element has the property in question
-  if (sum(out) == 0) {out[which.max(as.vector(representation))] = TRUE} 
+  if (sum(out) == 0) {out[which.max(as.vector(representation))] = TRUE}
   names(out) = names(representation)
   out
 }
@@ -98,7 +106,7 @@ get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, th
 ## collect results in a tibble ::: 
 #### ideally, for each parameter tuple, "tall_brown" should have a higher mean_success than "brown_tall"
 
-iterations = 50
+iterations = 5000
 results = rbind(
   get_outcomes(iterations, n_obj = 4, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
   get_outcomes(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
