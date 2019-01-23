@@ -128,6 +128,34 @@ Hill, F.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Kamp%
+\ \BBA {} Partee%
+}{%
+Kamp%
+\ \BBA {} Partee%
+}{%
+{\protect \APACyear {1995}}%
+}]{%
+kamppartee1995}
+\APACinsertmetastar {%
+kamppartee1995}%
+\begin{APACrefauthors}%
+Kamp, H.%
+\BCBT {}\ \BBA {} Partee, B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1995}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Prototype theory and compositionality} {Prototype theory
+  and compositionality}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Cognition}{57}{}{129-191}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/0010-0277(94)00659-9} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Kennedy%
 }{%
 Kennedy%
@@ -227,6 +255,32 @@ Martin, J\BPBI E.%
 \newblock
 \APACjournalVolNumPages{Journal of Verbal Learning and Verbal
   Behavior}{8}{}{697--704}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+McNally%
+}{%
+McNally%
+}{%
+{\protect \APACyear {2016}}%
+}]{%
+mcnally2016}
+\APACinsertmetastar {%
+mcnally2016}%
+\begin{APACrefauthors}%
+McNally, L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Modification} {Modification}.{\BBCQ}
+\newblock
+\BIn{} M.~Aloni\ \BBA {} P.~Dekker\ (\BEDS), \APACrefbtitle {Cambridge Handbook
+  of Formal Semantics} {Cambridge handbook of formal semantics}\
+  (\BPG~442-466).
+\newblock
+\APACaddressPublisher{Cambridge}{Cambridge University Press}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
