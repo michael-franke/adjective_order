@@ -1,0 +1,47 @@
+---
+title: "Results Notebook"
+output: html_notebook
+---
+
+
+```{r}
+options(encoding = "UTF-8")
+source('~/adjective_order/results/01_referential_success_k-percent_semantics.r')
+```
+
+
+```{r}
+iterations = 5000
+
+data = list(); i = 1;
+
+for (n in seq(4,20,2)) {
+  for (th in seq(0.2,0.8,0.2)) {
+    dat  <- get_outcomes(iterations, n_obj = n, sd_brown = 0.1, sd_tall = 0.25, theta = th)
+    data[[i]] <- dat
+    i = i + 1
+  }
+}
+
+results = do.call(rbind, data)
+
+selection = select(filter(results, context_types == "all"), -sum_success_prob) %>% 
+  spread(key = ordering, value = mean_success) 
+
+results_plot = selection %>%
+  ggplot(aes(x = as.factor(n_obj), y = tall_brown - brown_tall, fill = as.factor(theta))) +
+  geom_bar(stat = "identity", position = "dodge") + facet_grid(sd_brown ~ sd_tall) +
+  ylab("difference in mean success probability") +
+  xlab("number of objects in context")  +
+  scale_fill_brewer(palette="Dark2", name = "semantic threshold")
+
+show(results_plot)
+```
+
+```{r}
+
+selection$group <- paste(selection$n_obj, selection$sd_brown, selection$sd_tall)
+
+selection %>% ggplot( aes(x=as.factor(theta), y= tall_brown - brown_tall, group = group, col=group)) + geom_point() + geom_line(linetype = "dashed")
+```
+
