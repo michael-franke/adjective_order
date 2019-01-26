@@ -110,8 +110,8 @@ for (i in 1:iterations) {
   ground_dist_adj2 = distributions[sample(1:3,1)]
   
   #use of of three match_normal_dist_to_closed_dist_behaviors
-  #dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"norm")
-  dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"trunc")
+  dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"norm")
+  #dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"trunc")
   #dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"minmax")
   data[[i]] <- dataline
 }
@@ -122,7 +122,7 @@ results=bind_rows(data)
 results = results %>% filter(! is.na(referent))
 
 # write csv
-write.csv(results, file = "big+trunc+5M.csv")
+write.csv(results, file = "big+norm+5M.csv")
 
 #print success
 print(sum(results$success)/nrow(results))

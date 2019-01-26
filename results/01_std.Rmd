@@ -43,5 +43,8 @@ show(results_plot)
 selection$group <- paste(selection$n_obj, selection$sd_brown, selection$sd_tall)
 
 selection %>% ggplot( aes(x=as.factor(theta), y= tall_brown - brown_tall, group = group, col=group)) + geom_point() + geom_line(linetype = "dashed")
+
+ axis.break(2, 2.9, style = "zigzag")
+
 ```
 

@@ -12,7 +12,7 @@ source('~/adjective_order/results/01_referential_success_k-percent_semantics.r')
 
 ```{r}
 
-iterations = 5000
+iterations = 50
 results = rbind(
   get_outcomes(iterations, n_obj = 4, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
   get_outcomes(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
@@ -49,5 +49,12 @@ selection$group <- paste(selection$n_obj, selection$sd_brown, selection$sd_tall)
 
 selection %>% ggplot( aes(x=as.factor(theta), y= tall_brown - brown_tall, group = group, col=group)) + geom_point() + geom_line(linetype = "dashed")
 
+```
+```{r}
+selection %>% ggplot( aes(x=as.factor(theta), y= tall_brown - brown_tall, group = group, col=group)) + geom_point() + geom_line(linetype = "dashed")
+library(plotrix)
+
+ axis.break()
+ #axis.break(2, 2.9, style = "zigzag")
 ```
 
