@@ -94,9 +94,12 @@ get_outcome = function(n_obj, sd_brown, sd_tall, theta, ground_truth_dist_brown,
 
 
 distributions = c("norm", "beta_1_1", "beta_1_5")
+
+#three possible match_normal_dist_to_closed_dist_behaviors
+dist_behaviours = c("norm", "trunc", "minmax")
 iterations = 5*10^6
 
-data_norm = list(); data_trunc = list(); data_minmax = list();
+data = list(); data_trunc = list(); data_minmax = list();
 for (i in 1:iterations) {
   nobj = sample(4:20,1)
   
@@ -104,16 +107,17 @@ for (i in 1:iterations) {
   sd_adj1 = min(sd_adjs) # we want to make sure that the first adj is less subjective
   sd_adj2 = max(sd_adjs) 
   
-  threshold = runif(1, 0, 1)
+  threshold = runif(1, 0.2, 0.8)
   
   ground_dist_adj1 = distributions[sample(1:3,1)]
   ground_dist_adj2 = distributions[sample(1:3,1)]
+  dist_behaviour = dist_behaviours[sample(1:3,1)] 
   
-  #use of of three match_normal_dist_to_closed_dist_behaviors
-  dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"norm")
-  #dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"trunc")
-  #dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold, ground_truth_dist_brown = ground_dist_adj1,  ground_truth_dist_tall = ground_dist_adj2,"minmax")
-  data[[i]] <- dataline
+  dataline = get_outcome(n_obj = nobj, sd_brown = sd_adj1, sd_tall = sd_adj2, theta = threshold,
+                         ground_truth_dist_brown = ground_dist_adj1,
+                         ground_truth_dist_tall = ground_dist_adj2, 
+                         norm_dist_behaviour = dist_behaviour)
+    data[[i]] <- dataline
 }
 
 results=bind_rows(data)
@@ -122,7 +126,7 @@ results=bind_rows(data)
 results = results %>% filter(! is.na(referent))
 
 # write csv
-write.csv(results, file = "big+norm+5M.csv")
+write.csv(results, file = "big.csv")
 
 #print success
 print(sum(results$success)/nrow(results))
