@@ -4,7 +4,7 @@ source("01_referential_success_k-percent_semantics.r")
 
 ## number of samples to take
 # careful! this is `n_samples` samples per 9 combinations of distribution types
-n_samples = 5000 
+n_samples = 3000 
 
 out = map_df(1:n_samples, function(i) {
   

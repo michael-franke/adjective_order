@@ -73,7 +73,7 @@ closed = list("name" = "closed",
               # the size of the interval matters because the standard deviation of the subjective noise
               # is relative to the "spacing between objects" so to speak; we set it, therefore, in 
               # correspondence to the 99.99% credible interval of the standard normal distribution
-              "parameters" = list(min = 0, max = 2*qnorm(0.9999)),
+              "parameters" = list(min = 0, max = 20*qnorm(0.9999)),
               "lower_bound" = -Inf,
               "upper_bound" = Inf)
 
