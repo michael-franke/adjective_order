@@ -7,13 +7,38 @@
 
 library(tidyverse)
 library(HDInterval)
+library(truncdist)
 
 ## convenience functions
 
-get_agent_representation = function(true_values, n_obj, sd_brown, sd_tall) {
-  out = matrix(c(rnorm(n_obj, mean = true_values[1,], sd_brown),
-                 rnorm(n_obj, mean = true_values[2,], sd_tall)), 
-               nrow = 2, byrow = TRUE)
+get_agent_representation = function(true_values, 
+                                    n_obj, 
+                                    sd_brown, 
+                                    sd_tall, 
+                                    lower_bound_brown = -Inf, 
+                                    upper_bound_brown = Inf,
+                                    lower_bound_tall = -Inf, 
+                                    upper_bound_tall = Inf) {
+  out = matrix(
+    c(
+      map_dbl(1:n_obj, function(i) {
+        rtrunc(n = 1, 
+               spec = "norm", 
+               a = lower_bound_brown, 
+               b = upper_bound_brown, 
+               mean = true_values[1,i], 
+               sd = sd_brown)
+      }),
+      map_dbl(1:n_obj, function(i) {
+        rtrunc(n = 1, 
+               spec = "norm", 
+               a = lower_bound_tall, 
+               b = upper_bound_tall, 
+               mean = true_values[2,i], 
+               sd = sd_tall)
+      })
+    ),
+    nrow = 2, byrow = TRUE)
   colnames(out) = 1:n_obj
   rownames(out) = c("brown", "tall")
   out
@@ -35,36 +60,124 @@ get_truth_values = function(representation, theta) {
   out
 }
 
-## main function to gather outcomes for different parameter settings
+## define ground-truth distributions
 
-get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, theta = 0.5) {
-  outcomes = map_df(1:iterations, function(i, nobj = n_obj) {
-    
-    true_values = matrix(c(rnorm(n_obj),
-                           rnorm(n_obj)), 
-                         nrow = 2, byrow = TRUE)
-    
-    speaker_representation = get_agent_representation(true_values, n_obj, sd_brown, sd_tall) 
-    listener_representation = get_agent_representation(true_values, n_obj, sd_brown, sd_tall) 
-    
-    brown_sp = get_truth_values(speaker_representation[1,], theta)
-    tall_sp  = get_truth_values(speaker_representation[2,], theta)
-    
-    brown_li = get_truth_values(listener_representation[1,], theta)
-    tall_li  = get_truth_values(listener_representation[2,], theta)
-    
-    referent = which(tall_sp & brown_sp)[1]
-    
-    tall_brown = as.integer(names(which(get_truth_values(listener_representation[2,][which(brown_li)], theta))))
-    brown_tall = as.integer(names(which(get_truth_values(listener_representation[1,][which(tall_li)], theta))))
-    
-    tibble(tall_brown = ifelse(referent %in% tall_brown, 1/length(tall_brown), 0),
-           brown_tall = ifelse(referent %in% brown_tall, 1/length(brown_tall), 0),
-           referent = referent,
-           exception = tall_brown < brown_tall,
-           unique_tallbrown = length(which(tall_sp & brown_sp)) == 1)
-    
-  }) %>% filter(! is.na(referent))
+open = list("name" = "open",
+            "fct_call" = "rnorm",
+            "parameters" = list(mean = 0, sd = 1),
+            "lower_bound" = -Inf,
+            "upper_bound" = Inf)
+
+closed = list("name" = "closed",
+              "fct_call" = "runif",
+              # the size of the interval matters because the standard deviation of the subjective noise
+              # is relative to the "spacing between objects" so to speak; we set it, therefore, in 
+              # correspondence to the 99.99% credible interval of the standard normal distribution
+              "parameters" = list(min = 0, max = 2*qnorm(0.9999)),
+              "lower_bound" = -Inf,
+              "upper_bound" = Inf)
+
+# half_open = list("name" = "half-open",
+#                    "fct_call" = "rbeta",
+#                    "parameters" = list(shape1 = 5, shape2 = 1),
+#                    "lower_bound" = -Inf,
+#                    "upper_bound" = Inf)
+
+## generate a single context / data point
+get_single_outcome = function(n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, theta = 0.5, 
+                              dist_brown = open, dist_tall = open, short_output = T) {
+  
+  # add the number of objects to the distributions from which
+  # to sample actual feature values
+  dist_brown$parameters$n = n_obj
+  dist_tall$parameters$n = n_obj
+  
+  true_values = matrix(c(do.call(dist_brown$fct_call, dist_brown$parameters),
+                         do.call(dist_tall$fct_call, dist_tall$parameters)), 
+                       nrow = 2, byrow = TRUE)
+  
+  speaker_representation = get_agent_representation(
+    true_values, 
+    n_obj, 
+    sd_brown, 
+    sd_tall,
+    lower_bound_brown = dist_brown$lower_bound,
+    upper_bound_brown = dist_brown$upper_bound,
+    lower_bound_tall = dist_tall$lower_bound,
+    upper_bound_tall = dist_tall$upper_bound
+  ) 
+  
+  listener_representation = get_agent_representation(
+    true_values, 
+    n_obj, 
+    sd_brown, 
+    sd_tall,
+    lower_bound_brown = dist_brown$lower_bound,
+    upper_bound_brown = dist_brown$upper_bound,
+    lower_bound_tall = dist_tall$lower_bound,
+    upper_bound_tall = dist_tall$upper_bound
+  ) 
+  
+  brown_world = get_truth_values(true_values[1,],theta)
+  tall_world = get_truth_values(true_values[2,],theta)
+  
+  brown_sp = get_truth_values(speaker_representation[1,], theta)
+  tall_sp  = get_truth_values(speaker_representation[2,], theta)
+  
+  brown_li = get_truth_values(listener_representation[1,], theta)
+  tall_li  = get_truth_values(listener_representation[2,], theta)
+  
+  referent = which(tall_sp & brown_sp)[1]
+  
+  tall_brown = as.integer(names(which(get_truth_values(listener_representation[2,][which(brown_li)], theta))))
+  brown_tall = as.integer(names(which(get_truth_values(listener_representation[1,][which(tall_li)], theta))))
+  
+  if (short_output) {
+    tibble(
+      tall_brown = ifelse(referent %in% tall_brown, 1/length(tall_brown), 0),
+      brown_tall = ifelse(referent %in% brown_tall, 1/length(brown_tall), 0),
+      referent = referent,
+      exception = tall_brown < brown_tall,
+      unique_tallbrown = length(which(tall_sp & brown_sp)) == 1
+    )  
+  } else {
+    tibble(#output 
+      tall_brown = ifelse(referent %in% tall_brown, 1/length(tall_brown), 0),
+      brown_tall = ifelse(referent %in% brown_tall, 1/length(brown_tall), 0),
+      referent = referent,
+      success = tall_brown > brown_tall,
+      exception = !success,
+      sd_adjs_equal = sd_tall == sd_brown,
+      num_referents_speaker = sum(tall_sp & brown_sp),
+      num_referents_listener = sum(tall_li & brown_li),
+      num_referents_world = sum(brown_world & tall_world),
+      unique_tallbrown = num_referents_speaker == 1,
+      #input
+      n_obj = n_obj,
+      sd_brown = sd_brown,
+      sd_tall = sd_tall, 
+      theta = theta, 
+      dist_brown = dist_brown$name, 
+      dist_tall = dist_tall$name
+    )
+  }
+  
+}
+
+## gather outcomes for a fixed parameter setting and summarize over them
+get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, theta = 0.5, 
+                        dist_brown = open, dist_tall = open) {
+  
+  # generate outcomes
+  outcomes = map_df(1:iterations, function(i) get_single_outcome(
+    n_obj, 
+    sd_brown, 
+    sd_tall,
+    theta, 
+    dist_brown, 
+    dist_tall,
+    short_output = T,
+  )) %>% filter(! is.na(referent))
   
   outcomes_all = outcomes %>% 
     gather(ordering, success_prob, brown_tall, tall_brown) %>% 
@@ -103,32 +216,3 @@ get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, th
   rbind(outcomes_all, outcomes_uniqueContexts)
 }
 
-## collect results in a tibble ::: 
-#### ideally, for each parameter tuple, "tall_brown" should have a higher mean_success than "brown_tall"
-
-iterations = 5000
-results = rbind(
-  get_outcomes(iterations, n_obj = 4, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
-  get_outcomes(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
-  get_outcomes(iterations, n_obj = 8, sd_brown = 0.1, sd_tall = 0.25, theta = 0.5),
-  get_outcomes(iterations, n_obj = 4, sd_brown = 0.2, sd_tall = 0.3, theta = 0.5),
-  get_outcomes(iterations, n_obj = 6, sd_brown = 0.2, sd_tall = 0.3, theta = 0.5),
-  get_outcomes(iterations, n_obj = 8, sd_brown = 0.2, sd_tall = 0.3, theta = 0.5),
-  get_outcomes(iterations, n_obj = 4, sd_brown = 0.1, sd_tall = 0.25, theta = 0.7),
-  get_outcomes(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.25, theta = 0.7),
-  get_outcomes(iterations, n_obj = 8, sd_brown = 0.1, sd_tall = 0.25, theta = 0.7),
-  get_outcomes(iterations, n_obj = 4, sd_brown = 0.2, sd_tall = 0.3, theta = 0.7),
-  get_outcomes(iterations, n_obj = 6, sd_brown = 0.2, sd_tall = 0.3, theta = 0.7),
-  get_outcomes(iterations, n_obj = 8, sd_brown = 0.2, sd_tall = 0.3, theta = 0.7)
-)
-show(results)
-
-results_plot = select(filter(results, context_types == "all"), -sum_success_prob) %>% 
-  spread(key = ordering, value = mean_success) %>%
-  ggplot(aes(x = as.factor(n_obj), y = tall_brown - brown_tall, fill = as.factor(theta))) +
-  geom_bar(stat = "identity", position = "dodge") + facet_grid(sd_brown ~ sd_tall) +
-  ylab("difference in mean success probability") +
-  xlab("number of objects in context")  +
-  scale_fill_brewer(palette="Dark2", name = "semantic threshold")
-
-show(results_plot)
