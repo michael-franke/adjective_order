@@ -7,7 +7,8 @@
 \usepackage{multicol}
 \usepackage{varwidth}
 \usepackage{blindtext}
-
+\usepackage{nicefrac}
+\usepackage{enumerate}
 
 \usepackage{linguex} % ** special include in directory: for doing handy example labeling and bracketing
 \renewcommand{\firstrefdash}{} % used for linguex package not to put hyphens in example refs (1a instead of 1-a)
@@ -77,8 +78,9 @@ In their study of adjective meaning, \citeA{schmidtetal2009} began with the obse
 To answer this question, \citeauthor{schmidtetal2009} collected human judgments about what counts as ``tall'' for different sets of objects. They then compared these judgments with the predictions from a number of semantic models that use various strategies to determine tallness in context. The strategies considered fell into one of two classes. The first class computed the tallness threshold directly, using various parametric and non-parametric procedures to compute a height cutoff above which objects count as tall. The second class inferred the tallness threshold on the basis of category membership, first performing a clustering analysis on the set of objects and then identifying as tall those objects that belonged to the cluster with the tallest object.
 
 Two models outperformed the rest. The simplest was a threshold-computing model that sets the threshold on the basis of relative height by range: any object that fell within the top $k\%$ of the range of heights counts as tall. This model sets the tallness threshold in a given context, $T(C)$, by subtracting $k\%$ of the range of heights from the maximum height (where \texttt{max} indicates the maximum object height in context and \texttt{min} indicates the minimum object height):
-$$T(C) = \texttt{max} - k \cdot (\texttt{max} - \texttt{min}).$$
-So, if the maximum object height is 10 on the relevant scale and the minimum height is 2, a $k$ of 50\% would set the tallness threshold at 6; that is, an object with a height greater than 6 would count as tall. Notably, the more complex clustering model performed no better than this threshold model when it came to predicting human judgments.
+$$T(C) = \texttt{max} - \theta \cdot (\texttt{max} - \texttt{min})\,, \text{where $\theta = \nicefrac{k}{100}$.}$$
+So, if the maximum object height is 10 on the relevant scale and the minimum height is 2, a $k$ of 50\% would set the tallness threshold at 6; that is, an object with a height greater than 6 would count as tall in that context. Notably, the more complex clustering model performed no better than this threshold model when it came to predicting human judgments.
+We will therefore use this simple, but empirically motivated threshold semantics in the following.
 
 %a subsective semantics where the meaning of the adjective depends on the meaning of the noun it modifies
 %
@@ -102,19 +104,27 @@ So, if the maximum object height is 10 on the relevant scale and the minimum hei
 %
 %the best RH-R threshold is k = 27% for Experiment 2 (with a noise parameter of ? = 0.01) and k = 29% overall
 
-\section{Model}
+\section{Motivating example}
 
-In the following we use ``brown'' and ``big'' as mnemonic labels for any two adjectives that are, respectively, less and more subjective when compared against each other. Our goal is to demonstrate why an utterance of ``big brown $X$'' is communicatively more efficient on average than an utterance of ``brown big $X$''. Average communicative success is formalized as \emph{expected utility}, which is defined as the average probability of making the listener choose the intended referent.
+In the following we use ``brown'' and ``big'' as mnemonic labels for any two adjectives that are, respectively, less and more subjective when compared against each other. Our goal is to demonstrate why an utterance of ``big brown $X$'' is communicatively more efficient on average than an utterance of ``brown big $X$''. Average communicative success is spelled out here as \emph{expected utility} in a situation where the speaker wants to refer to an object and specified, consequently, as the average probability of getting the listener to choose the intended referent.
 
-Figure~\ref{fig:ModelIllustration} gives a concrete example to illustrate the main idea. Suppose that speaker and listener share access to a context of four bags. Bags differ only with respect to two properties, color and size. However, speaker and listener might perceive or construe the context differently, maybe due to different perceptual angles, different background knowledge or previous experience. The speaker wants to describe an object based on her subjective representation of the context. Suppose she wants the listener to hand her bag 4, which is both brown and big according to the speaker. The speaker can then choose the referential phrase ``big brown bag'' or the referential phrase ``brown big bag''. The listener will interpret whatever the referential phrase based on his own subjective representation of the context. The listener's interpretation of either referential phrase determines the probability that, in this concrete context, the listener ends up with the correct interpretation (bag 4). The expected utility associated with ``big brown bag'' in general is the average chance of communicative success when we integrate over different pairs of speaker and listener representations of an actual context and their probability of occurring.
+\begin{figure}[t]
+  \centering
+ \includegraphics[width=\linewidth]{model_picture.pdf} 
+  \caption{Illustration of the model}
+  \label{fig:ModelIllustration}
+\end{figure}
 
-\bigskip
 
-\mf{snippets}
+Figure~\ref{fig:ModelIllustration} gives a concrete example to illustrate the main idea. Suppose that speaker and listener share access to a context of four bags which differ only with respect to two properties, color and size. Speaker and listener represent the context differently, maybe due to different perceptual angles, different background knowledge or differences in previous experiences. We now ask: if the speaker wants to describe a bag which is both big and brown according to her subjective representation of the context, would it be better, on average, to describe it as ``big brown bag'' or ``brown big bag'', if the listener would interpret either phrase from his own subjective perspective?
 
-Assumptions:
+Suppose the speaker wants to refer to bag 4, which is both brown and big from her subjective point of view. If the listener hears ``big brown bag'', he tries to find the speaker-intended referent by incrementally restricting the set of possible referents according to the expression's syntactic structure. The listener therefore first considers all of the bags that are brown (given the comparison set of bags), and then rules from the set of brown bags out those that are not big (given the comparison set of brown bags). Similarly, for the phrase ``brown big bag'' but the result might be different since at each step of incremental context-narrowing the comparison class to evaluate the meaning of ``brown'' and ``big'' against could be different. In the example from Figure~\ref{fig:ModelIllustration}, for instance, the phrase ``brown bag'' would make the listener exclude bags 1 and 3 (on the assumption of the semantics of \citeA{schmidtetal2009} introduced above with, say, $k = 50\%$). From the remaining bags (2 and 4) only 4 is in the top 50\% along the range of size in this context set. So, the interpretation of ``big brown bag'' is successful; the listener recovers the speaker-intended referent uniquely. In contrast, for the expression ``brown big bag'', the listener first looks at the bags that count as big, which plausibly would rule out bag 2. Among the remaining bags 1, 3 and 4 the bag 3 is clearly not brown. For the sake of informal example, let's assume that the listener therefore considers both bags 1 and 4 as possible referents when hearing ``brown big bag''. The chance of referential success ---neglecting salience or other factors--- would be $\nicefrac{1}{2}$, lower than the certain communicative success when interpreting ``big brown bag''.
 
-\begin{enumerate}
+\section{Formal model}
+
+We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and variable degrees of subjectivity of the properties involved. The model hinges on a number of assumptions. First, we assume that the more subjective a property is, the bigger the average/expected inter-subjective differences in context representations. In other words, we operationalize the subjectivity of property $A$ here as the degree to which, on average, listeners and speakers will have diverging (meaning-relevant) representations of the same object's property $A$. 
+
+\begin{enumerate}[{A}1:]
 \item subjectivity is intersubjective variability in feature representations
 \item adjectival modification is, at least sometimes, incrementallly intersective (following syntactic structure, not surface order)
 \item adjectives have, at least sometimes, a reading that is entirely or in part determined by the local context only (e.g., ``big in the context of the currently relevant/salient objects'')
@@ -127,12 +137,6 @@ If one property is more subjective than another, the first property is more like
 
 When we take the average amount of divergence between subjective representations and the resulting differential communicative success between ordering-variants into account, we see that, indeed, adjectives which pick out more subjective properties should indeed occur later in an incrementally interpreted referential noun phrase.
 
-\begin{figure}[t]
-  \centering
- \includegraphics[width=\linewidth]{model_picture.pdf} 
-  \caption{Illustration of the model}
-  \label{fig:ModelIllustration}
-\end{figure}
 
 \bibliographystyle{apacite}
 \setlength{\bibleftmargin}{.125in}
