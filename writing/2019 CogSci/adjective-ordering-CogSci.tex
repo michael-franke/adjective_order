@@ -125,15 +125,15 @@ Suppose the speaker wants to refer to bag 4, which is both brown and big from he
 
 \section{Computing average communicative success}
 
-We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and variable degrees of subjectivity of the properties involved. A single run of the Monte Carlo simulation proceeds as follows:
+We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. A single run of the Monte Carlo simulation proceeds as follows:
 
 \begin{enumerate}
-\item We begin by sampling a number $n$ uniformly at random from 4 to 20 as the number of bags in the current conversational context (more generally: the number of objects of which the modified noun is true). 
-\item For each object $o$, we sample the degree to which $o$ is brown and the degree to which it is big. These samples are obtained from independent draws from a standard normal distribution. This yields a representation of the \emph{actual context} $C$ as an $n \times 2$ matrix of feature values for the $n$ objects. The probability of sampling context $C$ for fixed $n$ is
+\item We begin by sampling a number $n$ of bags in the current conversational context (more generally: the number of objects of which the modified noun is true); $n$ gets sampled uniformly at random from 4 to 20. 
+\item For each object $o$, we sample the degree to which $o$ is brown and the degree to which it is big. These samples are obtained from independent draws from a standard normal distribution. This sampling yields a representation of the \emph{actual context} $C$ as an $n \times 2$ matrix of feature values for the $n$ objects. The probability of sampling context $C$ for fixed $n$ is
   \begin{align*}
   P(C \mid n) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij} \mid \mu = 0, \sigma = 1)\,.
   \end{align*}
-\item Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of $C$ is derived from $C$ by normally distributed noise, with a fixed standard deviation for each adjective. The probability of obtaining subjective representation $C^X$ from actual context $C$ is
+\item Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of $C$ is derived from $C$ by assuming normally distributed noise around the property degrees in $C$, with a fixed standard deviation for each adjective. The probability of obtaining a subjective representation $C^X$ from actual context $C$ is
   \begin{align*}
 P(C^X \mid C) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij}^X \mid \mu = C_{ij}, \sigma = \sigma_j)\,.
   \end{align*}
@@ -143,8 +143,8 @@ The standard deviations $\sigma_{1,2}$ are obtained by sampling two numbers unif
    \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^X} & = \den{\text{adj}_i}^{\den{\text{adj}_j}^{C^X}} 
   \end{align*}
   \mf{Should some of this go into the previous section on semantics? --- I tend to say yes.}
-\item We then sample the \emph{speaker-intended referent object} $i^*$ randomly from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$, i.e., an object that is both brown and big from the point of view of the speaker.If there is no such object, the sample is discarded from further analysis.
-\item If the listener's interpretation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' from his subjective point of view is $I = \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$ and 0 otherwise. We record the probability of recovery for both adjective ordering sequences and evaluate their distribution over all samples obtained in this way.
+\item We then sample the \emph{speaker-intended referent object} $i^*$ randomly from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$ (i.e., an object that is both brown and big from the point of view of the speaker). If there is no such object, the run is discarded.
+\item If the listener's interpretation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' from his subjective point of view is $I = \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$ and 0 otherwise. We record the probability of recovery for both adjective orders and evaluate their distribution over all samples obtained in this way.
 \end{enumerate}
 
 \section{Results}
