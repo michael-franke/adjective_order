@@ -35,16 +35,17 @@ vignettes/*.pdf
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 
-writing/2019 CogSci/adjective-ordering-CogSci.aux
+# Latex
 
-writing/2019 CogSci/adjective-ordering-CogSci.blg
-
-writing/2019 CogSci/adjective-ordering-CogSci.log
-
+*.aux
+*.blg
+*.log
+*.synctex.gz
+*.dvi
+*.ps
 writing/2019 CogSci/adjective-ordering-CogSci.pdf
 
-writing/2019 CogSci/adjective-ordering-CogSci.synctex.gz
 
-writing/2019 CogSci/adjective-ordering-CogSci.dvi
-
-writing/2019 CogSci/adjective-ordering-CogSci.ps
+# R markdown
+sandbox
+*.html

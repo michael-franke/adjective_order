@@ -174,8 +174,8 @@ get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, th
     sd_brown, 
     sd_tall,
     theta, 
-    dist_brown, 
-    dist_tall,
+    #dist_brown, 
+    #dist_tall,
     short_output = T,
   )) %>% filter(! is.na(referent))
   
@@ -192,8 +192,8 @@ get_outcomes = function(iterations, n_obj = 6, sd_brown = 0.1, sd_tall = 0.1, th
            proportion_exceptions = sum_expections / eff_samples,
            iterations = iterations,
            n_obj = n_obj, 
-           sd_brown = paste0("sd_brown: ", sd_brown),
-           sd_tall = paste0("sd_tall: ", sd_tall),
+           sd_brown = paste0("sd_less_subjective: ", sd_brown),
+           sd_tall = paste0("sd_more_subjective: ", sd_tall),
            theta = theta)
   
   outcomes_uniqueContexts = outcomes %>% filter(unique_tallbrown == TRUE) %>% 

@@ -1,0 +1,91 @@
+---
+title: "Results Notebook"
+output: html_notebook
+---
+
+<!--
+
+*Run* by pressing *Ctrl+Shift+Enter*. 
+*Insert Chunk* by pressing *Ctrl+Alt+I*.
+
+-->
+
+
+```{r}
+library(scales)
+selection = read_csv("../results/06_showcase_results.csv") 
+```
+
+number of iterations per bar: 5000
+
+
+
+# Mean mean success probability
+```{r}
+ann_text <- data.frame(lab = "success threshold", success=-0.01, n_obj=factor(8), theta=factor(0.2), sd_brown="sd_less_subjective: 0.1",sd_tall="sd_more_subjective: 0.25")
+selection$success <- selection$tall_brown - selection$brown_tall
+
+results_plot = selection %>%
+  ggplot(aes(x = as.factor(n_obj), y = success, fill = as.factor(theta))) +
+  geom_bar(stat = "identity", position = "dodge") + facet_grid(sd_brown ~ sd_tall, scales="free") +
+  ylab("difference in mean success probability") +
+  xlab("number of objects in context")  +
+  scale_fill_brewer(palette="Set1", name = "semantic threshold") +
+  expand_limits(y = -0.03) + geom_hline(aes(yintercept= 0), colour= 'black', linetype = "dashed")+ 
+  geom_text(data = ann_text, aes(label = lab), fontface = "italic", size = 3, check_overlap = TRUE)
+
+show(results_plot)
+```
+
+# Exceptions plot
+
+```{r}
+
+ann_text <- data.frame(lab = "< 50%", proportion_exceptions=0.47, n_obj=factor(4), theta=factor(0.2), sd_brown="sd_less_subjective: 0.1",sd_tall="sd_more_subjective: 0.25")
+
+exceptions_plot = selection %>%
+  ggplot(aes(x = as.factor(n_obj), y = proportion_exceptions, fill = as.factor(theta))) +
+  geom_bar(stat = "identity", position = "dodge") + facet_grid(sd_brown ~ sd_tall) +
+  ylab("proportion of exceptions") +
+  xlab("number of objects in context")  +
+  scale_fill_brewer(palette="Set1", name = "semantic threshold") +
+  expand_limits(y = 0.55) + geom_hline( yintercept = 0) + geom_hline(aes(yintercept= 0.5), colour= 'black', linetype="dashed") +
+  geom_text(data = ann_text, aes(label = lab), fontface = "italic", size = 3, check_overlap = TRUE)
+
+show(exceptions_plot +  scale_y_continuous(labels=percent))
+```
+
+# Reversed plot for exceptions
+
+```{r}
+show(exceptions_plot + scale_y_reverse(labels=percent))
+```
+
+# Combined graph
+
+Maybe we could combine both plots with % of exceptions on reversed axis and success on positive y axis. Here's a start, but I don't know how to use a different palette for the exceptions.
+
+
+```{r}
+reverse_scale = 0.25
+
+combined_plot = selection %>%
+  ggplot(aes(x = as.factor(n_obj), fill = as.factor(theta))) +
+  geom_col(aes(y = success), position = "dodge") +
+  geom_col(aes(y = -reverse_scale*proportion_exceptions), position = "dodge") +
+  facet_grid(sd_brown ~ sd_tall) +
+  ylab("difference in mean success probability  /\n proportion of exceptions") +
+  xlab("number of objects in context")  +
+  scale_fill_brewer(palette="Set1", name = "semantic threshold") +
+  geom_hline( yintercept = 0) +  scale_y_continuous(breaks = c(-0.2*reverse_scale,-0.1*reverse_scale,0.05,0,0.1,0.2), labels = c("20%","10%","0.05","0","0.1","0.2")) 
+
+
+show(combined_plot)
+
+# geom_col(aes(y = -value2, fill = "Value 2")) 
+```
+
+
+# TODO
+* Export to Latex
+
