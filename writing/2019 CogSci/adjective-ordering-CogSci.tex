@@ -9,6 +9,7 @@
 \usepackage{blindtext}
 \usepackage{nicefrac}
 \usepackage{enumerate}
+\usepackage{booktabs}
 
 \usepackage{linguex} % ** special include in directory: for doing handy example labeling and bracketing
 \renewcommand{\firstrefdash}{} % used for linguex package not to put hyphens in example refs (1a instead of 1-a)
@@ -27,6 +28,10 @@
 %% for R_eproducible_LaTeX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+% \usepackage{siunitx}
+
 % set the name of the folder in which the CSV files with 
 % information from R is stored
 \newcommand{\datafoldername}{R_data_4_TeX}
@@ -44,27 +49,27 @@
 % individual variables that do not belong to a larger chunk can be stored
 \newcommand{\rlgetvariable}[1]{\csvreader[]{\datafoldername/myvars.csv}{#1=\myvar}{\myvar}\xspace}
 
-% rlnum format a decimal number
-\newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
-                             exponent-product = \cdot,
-                             round-mode=places,
-                             round-precision=#2,
-                             group-digits=false]{#1}}
+% % rlnum format a decimal number
+% \newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
 
-\newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
-                          scientific-notation = true,
-                             exponent-product = \cdot,
-                             round-mode=places,
-                             round-precision=#2,
-                             group-digits=false]{#1}}
+% \newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
+%                           scientific-notation = true,
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
 
-\newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
-             late after line = {{,}\ }, late after last line = {{}}]
-            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
+% \newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
 
-\newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
-             late after line = {{,}\ }, late after last line = {{}}]
-            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
+% \newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,27 +254,7 @@ We use a Monte Carlo simulation to estimate the difference in expected referenti
 
 \section{Results}
 
-Based on $10^5$ Monte Carlo samples from the process outline above, we estimate the expected probability of recovering the speaker's intended referent based on the ordering ``big brown bag'' as $0.77$, compared to $0.71$ for the ordering ``brown big bag''. \mf{gather more data; provide some kind of interval estimate (bootstrapped CI or some such)?} This lends credence to the general idea that, on average, the ordering of adjectives by subjectivity does affect average referential success and that using the less subjective adjective early in sequential interpretation is communicatively beneficial.
-
-\mf{regression results}
-
-\begin{table}[h]
-    \centering
-
-    \pgfplotstabletypeset[sci zerofill,
-    col sep = comma,
-    every head row/.style={before row = \toprule, after row = \midrule},
-    every last row/.style={after row = \bottomrule},
-    columns/Rowname/.style={string type, column name={}, column type = l},
-    columns/Estimate/.style={column name={Estimate}, dec sep align},
-    columns/Std. Error/.style={column name={SDE}, sci sep align, sci},
-    columns/t value/.style={column name={$t$-value}, dec sep align},
-    columns/Pr(>|t|)/.style={column name={$p$-value}, dec sep align }]
-    {R_data_4_TeX/regression_results.csv}
-
-    \caption{A table generated from a CSV-file with the code in Figure~\ref{fig:Code}.}
-    \label{tab:RegressionResults}
-  \end{table}
+Based on $10^5$ Monte Carlo samples from the process outline above, we estimate the expected probability of recovering the speaker's intended referent based on the ordering ``big brown bag'' as \rlgetvariable{EU_big_brown}, compared to \rlgetvariable{EU_brown_big} for the ordering ``brown big bag''. The obtained samples of expected utilities for each ordering appear to be different indeed (paired $t$-test, $t \approx \rlgetvariable{Tstatistic}$, $p < 10e^{80}$). This lends credence to the general idea that, on average, the ordering of adjectives by subjectivity does affect average referential success and that using the less subjective adjective early in sequential interpretation is communicatively beneficial.
 
 
 To understand these results better, Figure~\ref{fig:Showcase_examples} shows results from Monte Carlo simulations for a small selection of fixed parameter values. We investigate values for standard deviations $\sigma_{\text{brown}} \in \{0.1, 0.2\}$ and $\sigma_{\text{big}} \in \{0.25, 0.3\}$ for the subjective representations of agents and semantic threshold values $\theta \in \{ 0.2, 0.4, 0.6, 0.8 \}$. For each combination of these values, we ran 10,000 simulations otherwise following the procedure outlined above. The vertical axis in Figure~\ref{fig:Showcase_examples} plots two measure. Upward from the 0-mark is the difference in mean communicative success between ``big brown bag'' and ``brown big bag''. We see that all mean values are positive, which means that for all parameter constellation picked out here, the phrase ``big brown bag'' was indeed estimated to be communicatively more successful in each case. Below the 0-mark in Figure~\ref{fig:Showcase_examples} we see the percentage of simulation runs in which the reverse ordering sequence ``brown big bag'' had a higher expected utility. This shows that the communicative advantage of one adjective ordering over another is not absolute. There are exceptions. However, when averaging over all cases there is nonetheless a clear communicative benefit of ``big brown bag'' over ``brown big bag''.
@@ -281,9 +266,38 @@ To understand these results better, Figure~\ref{fig:Showcase_examples} shows res
   \label{fig:Showcase_examples}
 \end{figure}
 
-\bigskip
-\bigskip
-\bigskip
+We also investigated the results from the (unconstrained) Monte Carlo simulation to learn about systematic influences of the model's parameters on the obtained results. Towards this end, we used a linear regression model, regressing the difference in expected utility between ``big brown bag'' and ``brown big bag'' is each simulated context against factors $n_{\text{ob}}$ (number of objects in context), $\theta$ (semantic threshold), and $\sigma_{\text{diff}}$ (difference $\sigma_{\text{big}} - \sigma_{\text{brown}}$), as well as all of their interactions. We then used iterated deletion of factors, following model comparison based on AICs, to determine the simplest factor structure relevant for explaining the predicted measure. The resulting, simplified model contained the factors listed in Table~\ref{tab:RegressionResults}, which also shows its estimates. These results indicate that all main factors except $\sigma_{\text{diff}}$ seem to influence the difference in expected utilities. The more objects in context, the less difference we expect; similarly for higher values of semantic threshold $\theta$. The latter, as such, may seem surprising but it is attenuated by the significant interaction terms where higher values of $\theta$ make us predict higher differences in expected utility when both $n_{\text{onj}}$ and $\sigma_{\text{diff}}$ are also high. Evidence for the latter interaction can also be seen in Figure~\ref{fig:Showcase_examples} where the effect of increasing $\theta$ is most pronounced in the upper right quadrant where$\sigma_{\text{diff}}$ is highest. \mf{I don't think that any of this is particularly interesting; feels like doing homework for a bad class; does anyone see anything more interesting in these results? or should we skip it altogether?}
+
+
+\begin{table}[h]
+    \centering \footnotesize
+
+    \pgfplotstabletypeset[sci zerofill,
+    col sep = comma,
+    every head row/.style={before row = \toprule, after row = \midrule},
+    every last row/.style={after row = \bottomrule},
+    columns/Rowname/.style={string type, column name={}, column type = l},
+    columns/Estimate/.style={column name={Estimate}, dec sep align},
+    % columns/Std. Error/.style={column name={SDE}, sci sep align, sci},
+    columns/t value/.style={column name={$t$-value}, dec sep align},
+    columns/Pr(>|t|)/.style={column name={$p$-value}, dec sep align },
+    columns/sign/.style={string type, column name={}, column type = l},]
+    {R_data_4_TeX/regression_results.csv}
+
+    \caption{Estimates of coefficients of the simplified regression model.}
+    \label{tab:RegressionResults}
+  \end{table}
+
+
+\section{Discussion}
+
+\mf{some thoughts}
+
+\begin{itemize}
+\item how to interpret these results: not rational deliberation + context-based optimal decision, but rather evolutionarily evolved (soft) preference
+\item interpretation of subjectivity: subjective representations of agents are not (necessarily) the same as the formal linguist's degrees of a property; for us just an abstract way of implementing divergences in truth-value assignments; stochastic misalignments (as modeled here) could come from perception in context but also different general dispositions to classify a particular object as ADJ when paired with random other objects
+\item extension to other scale types (not necessarily)
+\end{itemize}
 
 \mf{maybe recycle the following for the discussion? as in: critical assumptions that could be challenged? \dots}
 

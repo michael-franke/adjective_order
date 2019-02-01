@@ -41,8 +41,6 @@ out = map_df(1:n_samples, function(i) {
 
 write_csv(x = out, path = "03_mc_results.csv")
 
-#print success
-print(paste0("average EU of 'tall brown': ", mean(out$tall_brown) %>% round(4)))
-print(paste0("average EU of 'brown tall': ", mean(out$brown_tall) %>% round(4)))
+
 
 
