@@ -16,10 +16,11 @@ output:
 ```{r}
 library(scales)
 library(tidyverse)
+
 selection = read.csv("../results/06_showcase_results.csv") 
 ```
 
-number of iterations per bar: 5000
+number of iterations per bar: 10000
 
 
 
