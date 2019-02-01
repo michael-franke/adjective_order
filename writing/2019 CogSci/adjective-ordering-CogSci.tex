@@ -106,12 +106,21 @@ In their study of adjective meaning, \citeA{schmidtetal2009} began with the obse
  
 To answer this question, \citeauthor{schmidtetal2009} collected human judgments about what counts as ``tall'' for different sets of objects. They then compared these judgments with the predictions from a number of semantic models that use various strategies to determine tallness in context. The strategies considered fell into one of two classes. The first class computed the tallness threshold directly, using various parametric and non-parametric procedures to compute a height cutoff above which objects count as tall. The second class inferred the tallness threshold on the basis of category membership, first performing a clustering analysis on the set of objects and then identifying as tall those objects that belonged to the cluster with the tallest object.
 
-Two models outperformed the rest. The simplest was a threshold-computing model that sets the threshold on the basis of relative height by range: any object that fell within the top $k\%$ of the range of heights counts as tall. This model sets the tallness threshold in a given context, $T(C)$, by subtracting $k\%$ of the range of heights from the maximum height (where \texttt{max} indicates the maximum object height in context and \texttt{min} indicates the minimum object height):
-$$T(C) = \texttt{max} - \theta \cdot (\texttt{max} - \texttt{min})\,, \text{where $\theta = \nicefrac{k}{100}$.}$$
-So, if the maximum object height is 10 on the relevant scale and the minimum height is 2, a $k$ of 50\% would set the tallness threshold at 6; that is, an object with a height greater than 6 would count as tall in that context. Notably, the more complex clustering model performed no better than this threshold model when it came to predicting human judgments.
-We will therefore use this simple, but empirically-motivated threshold semantics in the the reasoning that follows. 
+Two models outperformed the rest. The simplest was a threshold-computing model that sets the threshold on the basis of relative height by range: any object that fell within the top $k\%$ of the range of heights in context $C$ counts as tall in $C$. Formally, the set $\den{\text{tall}}^C$ of objects in $C$ that count as tall in $C$ is (where $\texttt{tall}(o)$ is the tallness of object $o$, \texttt{max} is the tallness of the tallest, \texttt{min} that of the smallest object in $C$):
+\begin{align}
+  \label{eq:Semantics}
+  \den{\text{tall}}^C & = \{ o \in C \mid \texttt{tall}(o) \ge \texttt{max} - \theta \cdot (\texttt{max} - \texttt{min}) \} \,, \\
+  & \ \ \ \ \ \ \text{where $\theta = \nicefrac{k}{100}$.} \nonumber
+\end{align}
+So, if the maximum object height is 10 on the relevant scale and the minimum height is 2, a $k$ of 50\% would set the tallness threshold at 6; that is, an object with a height greater than 6 would count as tall in that context. Notably, the more complex clustering model performed no better than this threshold model when it came to predicting human judgments. We will therefore use this simple, but empirically-motivated threshold semantics in the the reasoning that follows, treating the threshold $\theta$ as a free model variable.
 
-The next thing to consider is how the simple threshold semantics works in multi-adjective strings. \gcs{discussion of incremental context restriction}
+Following \citeA{simonic2018} and \citeA{scontrasetalSPadjectives} we further assume that iterated adjectival modification triggers \emph{sequentially intersective context updates}. Later adjectives (syntactically further removed from the head noun) are interpreted relative to contexts which have already been restricted by previous adjectives. For example, the denotation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j} $N$]]'' given a shared context $C$ of potential referents is:
+\begin{align}
+  \label{eq:SequentialInterpretation}
+  \den{\text{[adj\textsubscript{i} [adj\textsubscript{j} $N$]]}}^{C} & = \den{\text{adj}_i}^{\den{\text{adj}_j}^{C\cap \den{N}}} 
+\end{align} 
+In words, a string like ``big brown bag'' refers to all bags in context $C$ which count as brown in the set of bags in $C$ and that count as big in the class of bags that are brown in the previous sense. Each adjective is therefore interpreted relative to its local context of intermittent compositional semantic interpretation, so to speak. Paired with a context-dependent semantics as in \eqref{eq:Semantics}, it is in principle conceivable that ordering of adjectives matters for referential success.
+
 
 
 \section{Motivating example}
@@ -125,37 +134,72 @@ For the discussion that follows, we use ``brown'' and ``big'' as mnemonic labels
   \label{fig:ModelIllustration}
 \end{figure}
 
-To get this reasoning off the ground, we first need to make some assumptions about the effects of adjective subjectivity on our mental representations---representations that will be relevant to referential communications. Figure~\ref{fig:ModelIllustration} gives a concrete example to illustrate the main idea. Suppose that speaker and listener share access to a context of four bags that differ only with respect to two properties, color and size. Depending on their different perceptual angles, different background knowledge, or differences in previous experiences, speaker and listener might represent the context differently: their impressions of object size and object color could deviate from the ground truth. 
+To get this reasoning off the ground, we first need to make some assumptions about the effects of adjective subjectivity on our mental representations---representations that will be relevant to referential communications. Figure~\ref{fig:ModelIllustration} gives a concrete example to illustrate the main idea. Suppose that speaker and listener share access to a context of four bags that differ only with respect to color and size. Depending on their different perceptual angles, different background knowledge, or differences in previous experiences, speaker and listener might represent the context differently: their impressions of object size and object color could deviate from the ground truth. 
 
 Here is where subjectivity comes in: more subjective properties are more likely to lead to deviation between the ground truth (i.e., the true context) and an agent's representation of the property. Crucially, by deviating from the ground truth, these more subjective properties are also more likely to lead to deviations between two agent representations (e.g., between the speaker's and listener's representations in Figure \ref{fig:ModelIllustration}); these deviations \emph{and our awareness of their potential} are what lead to perceived subjectivity as measured by a faultless disagreement task. Language users are aware that their representations might deviate from each other's, and the potential for deviation is different for different properties. We illustrate this tendency in Figure \ref{fig:ModelIllustration}, where the agent representations of size deviate more from the ground truth than their representation of color.
 
-We now ask: if the speaker wants to describe a bag that is both big and brown according to her subjective representation of the context, would it be better, on average, to describe it as ``big brown bag'' or ``brown big bag'', knowing that the listener would interpret either phrase from his own subjective perspective? Concretely, suppose the speaker wants to refer to bag 4 in Figure \ref{fig:ModelIllustration}, which is both brown and big from her subjective point of view. If the listener hears ``big brown bag'', he tries to find the speaker-intended referent by incrementally restricting the set of possible referents according to the expression's syntactic structure. The listener therefore first considers all of the bags that are brown (given the comparison set of bags), and then rules out those that are not big (given the comparison set of brown bags). The process is similar for the phrase ``brown big bag'', but the result might be different since at each step of incremental context-narrowing the comparison class against which the listener evaluates the meaning of ``brown'' and ``big'' could differ. 
-
-This through this process of incremental restriction for the example from Figure~\ref{fig:ModelIllustration}, the phrase ``brown bag'' would make the listener exclude bags 1 and 3 (on the assumption of the semantics of \citeA{schmidtetal2009} introduced above with, say, $k = 50\%$). From the remaining bags (2 and 4), only 4 is in the top 50\% along the range of size in this context set. So, the interpretation of ``big brown bag'' is successful; the listener recovers the speaker-intended referent uniquely. In contrast, for the expression ``brown big bag'', the listener first looks at the bags that count as big, which plausibly would rule out bag 2. Among the remaining bags 1, 3 and 4, bag 3 is clearly not brown. For the sake of this informal example, assume that the listener therefore considers both bags 1 and 4 as possible referents when hearing ``brown big bag''. The chance of referential success (i.e., choosing bag 4)---neglecting salience or other factors---would be $\nicefrac{1}{2}$, lower than the certain communicative success when interpreting ``big brown bag''.
+We now ask: if the speaker wants to describe a bag that is both big and brown according to her subjective representation of the context, would it be better, on average, to describe it as ``big brown bag'' or ``brown big bag'', knowing that the listener would interpret either phrase from his own subjective perspective? Concretely, suppose the speaker wants to refer to bag 4 in Figure \ref{fig:ModelIllustration}, which is both brown and big from her subjective point of view. If the listener hears ``big brown bag'', he tries to find the speaker-intended referent by incrementally restricting the set of possible referents according to the interpretation rule in \eqref{eq:SequentialInterpretation}, applying the context-dependent semantics in \eqref{eq:Semantics} to his own subjective representation of the objects in question. For the example from Figure~\ref{fig:ModelIllustration} and assuming that $\theta = 0.5$ in \eqref{eq:Semantics}, the phrase ``brown bag'' would make the listener consider only bags 2 and 4. Of these only 4 is in the top 50\% along the range of size in this context set. So, the interpretation of ``big brown bag'' is successful; the listener recovers the speaker-intended referent uniquely. In contrast, for the expression ``brown big bag'', the listener first looks at the bags that count as big, which rules out only bag 2, since it is the only one below 50\% of the range of sizes. Among the remaining bags (1, 3 and 4), bag 3 is clearly not brown. For the sake of this informal example, assume that the listener therefore considers both bags 1 and 4 as possible referents when hearing ``brown big bag''. The chance of referential success (i.e., choosing bag 4)---neglecting salience or other factors---would be $\nicefrac{1}{2}$, lower than the certain communicative success when interpreting ``big brown bag''.
 
 
 \section{Computing average communicative success}
 
-We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. A single run of the Monte Carlo simulation proceeds as follows:
+We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. In this way, we are not assuming that agents themselves reason about stochastic mis-alignment of semantic judgements, and that they choose expressions that are optimal to these calculations. We merely compute the average communicative success of, so to speak, a fictitious community of agents who would use ``big brown bag'' to one that uses ``brown big bag'' without tailoring this choice to the specific context. A single run of the Monte Carlo simulation proceeds as follows:
 
 \begin{enumerate}
-\item We begin by sampling a number $n$ of bags in the current conversational context (more generally: the number of objects of which the modified noun is true); $n$ gets sampled uniformly at random from 4 to 20. 
-\item For each object $o$, we sample the degree to which $o$ is brown and the degree to which it is big. These samples are obtained from independent draws from a standard normal distribution. This sampling yields a representation of the \emph{actual context} $C$ as an $n \times 2$ matrix of feature values for the $n$ objects. The probability of sampling context $C$ for fixed $n$ is
+
+\item We first sample a number $n$ of bags in the current context uniformly at
+  random from 4 to 20.
+
+\item For each object $o$, we sample the degree to which $o$ is brown and the
+  degree to which it is big. These samples are obtained from independent draws
+  from a standard normal distribution. This sampling yields a representation of
+  the \emph{actual context} $C$ as an $n \times 2$ matrix of feature values for
+  the $n$ objects. The probability of sampling context $C$ for fixed $n$ is
   \begin{align*}
-  P(C \mid n) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij} \mid \mu = 0, \sigma = 1)\,.
+    P(C \mid n) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij} \mid \mu = 0, \sigma = 1)\,.
   \end{align*}
-\item Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of $C$ is derived from $C$ by assuming normally distributed noise around the property degrees in $C$, with a fixed standard deviation for each adjective. The probability of obtaining a subjective representation $C^X$ from actual context $C$ is
+
+\item Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of
+  $C$ is derived from $C$ by assuming normally distributed noise around the
+  property degrees in $C$, with a fixed standard deviation for each adjective.
+  The probability of obtaining a subjective representation $C^X$ from actual
+  context $C$ is
   \begin{align*}
-P(C^X \mid C) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij}^X \mid \mu = C_{ij}, \sigma = \sigma_j)\,.
+    P(C^X \mid C) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij}^X \mid \mu = C_{ij}, \sigma = \sigma_j)\,.
   \end{align*}
-The standard deviations $\sigma_{1,2}$ are obtained by sampling two numbers uniformly from the interval XYZ \mf{fill me!} and assigning the higher number to the more subjective adjective (``tall''), the lower to the less subjective adjective (``brown'').
-\item A \emph{semantic threshold} $\theta \sim \mathcal{U}(0,1)$ is sampled uniformly at random from the unit interval. By the semantics of \citeA{schmidtetal2009}, the denotation $\sem{adj\textsubscript{j}}^{C}$ of adjective $j \in \{1,2\}$ relative to some context $C$ (actual or subjective; possibly further restricted by previous adjectival modification) is the set of all objects $i$ such that $C_{ij} > \max_{i'}C_{i'j} - \theta \cdot (\max_{i'}C_{i'j} - \min_{i'}C_{i'j})$. The denotation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' is:
-  \begin{align*}
-   \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^X} & = \den{\text{adj}_i}^{\den{\text{adj}_j}^{C^X}} 
-  \end{align*}
-  \mf{Should some of this go into the previous section on semantics? --- I tend to say yes.} \gcs{hmm.. probably. I've left a placeholder above.}
-\item We then sample the \emph{speaker-intended referent object} $i^*$ randomly from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$ (i.e., an object that is both brown and big from the point of view of the speaker). If there is no such object, the run is discarded.
-\item If the listener's interpretation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' from his subjective point of view is $I = \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$ and 0 otherwise. We record the probability of recovery for both adjective orders and evaluate their distribution over all samples obtained in this way.
+  The standard deviations $\sigma_{1,2}$ are obtained by sampling two numbers
+  uniformly from the interval $[0;0.5]$ and assigning the higher number to the
+  more subjective adjective (``tall''), the lower to the less subjective
+  adjective (``brown'').
+
+\item A \emph{semantic threshold} $\theta \sim \mathcal{U}(0,1)$ is sampled
+  uniformly at random from the unit interval. We apply the context-dependent
+  threshold semantics in \eqref{eq:Semantics} of \citeA{schmidtetal2009} with
+  the sequentially intersective context update in
+  \eqref{eq:SequentialInterpretation}, using each agent's subjective context
+  representation, to yield each agent's subjective interpretation of each
+  referential phrase.\footnote{In this way, the actual context $C$ plays no role
+    in the assignment of ``subjective truth conditions''. It is just a means of
+    efficiently sampling subjective context representations that are more or
+    less aligned with each other.}
+  % The denotation $\sem{adj\textsubscript{j}}^{C}$ of adjective $j \in \{1,2\}$
+  % relative to some context $C$ (actual or subjective; possibly further
+  % restricted by previous adjectival modification) is the set of all objects
+  % $i$ such that $C_{ij} > \max_{i'}C_{i'j} - \theta \cdot (\max_{i'}C_{i'j} -
+  % \min_{i'}C_{i'j})$.
+ 
+\item We then sample the \emph{speaker-intended referent object} $i^*$ randomly
+  from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$ (i.e.,
+  an object that is both brown and big from the point of view of the speaker).
+  If there is no such object, the run is discarded.
+  
+\item If the listener's interpretation of the phrase ``[adj\textsubscript{i}
+  [adj\textsubscript{j}]]'' from his subjective point of view is $I =
+  \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the
+  probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$
+  and 0 otherwise. We record the probability of recovery for both adjective
+  orders and evaluate their distribution over all samples obtained in this way.
+
 \end{enumerate}
 
 \section{Results}
