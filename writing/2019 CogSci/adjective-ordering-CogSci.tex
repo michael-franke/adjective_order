@@ -122,7 +122,7 @@ Using a model of probabilistic utterance choice (e.g., \emph{big brown bag} vs.~
     \epsilon_{adj} & \text{otherwise}
   \end{cases}
 \end{align}
-The more subjective the adjective, the higher the error probability $\epsilon_{adj}$. With these beliefs about lexical divergence, \citeauthor{simonic2018} shows that the subjectivity-based ordering \emph{big brown bag} is a more rational choice for the speaker than \emph{brown big bag} in a wide range \gcs{can we be more specific about how wide this range is (in line with the 100K number in the summary of Scontras et al.)?} of randomly-generated contexts.
+The more subjective the adjective, the higher the error probability $\epsilon_{adj}$. With these beliefs about lexical divergence, \citeauthor{simonic2018} shows that the subjectivity-based ordering \emph{big brown bag} is a more rational choice for the speaker than \emph{brown big bag} in a wide range \gcs{can we be more specific about how wide this range is (in line with the 100K / 93\% number in the summary of Scontras et al.)?} of randomly-generated contexts.
 
 \citeauthor{scontrasetalSPadjectives}~(to appear) pursue a similar explanation for subjectivity-based ordering preferences. They treat adjective subjectivity as potential noise in the semantics of an adjective, similar to \citeauthor{simonic2018}, but they assume that, based on a ground-truth of objective adjective meaning, each agent (speaker or hearer) will incorrectly classify each potential referent in the current context $C$ with an error rate $\epsilon_{adj}$, which, again, indexes adjective subjectivity:
 \begin{align}
@@ -190,7 +190,7 @@ We now ask: if the speaker wants to describe a bag that is both big and brown ac
 
 \section{Computing average communicative success}
 
-We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag'' when averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. In this way, we are not assuming that agents themselves reason about stochastic mis-alignment of semantic judgements, and that they choose expressions that are optimal to these calculations. We merely compute the average communicative success of, so to speak, a fictitious community of agents who would use ``big brown bag'' to one that uses ``brown big bag'' without tailoring this choice to the specific context. A single run of the Monte Carlo simulation proceeds as follows:
+We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag''; we calculate this value by averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. In this way, we are not assuming that agents themselves reason actively about the stochastic misalignment of semantic judgements, or that they choose expressions that are optimal with respect to thesse calculations. We merely compute the average communicative success of, say, a fictitious community of agents who would use ``big brown bag'' (i.e., subjectivity-based ordering) and compare their success to that of a different community that uses ``brown big bag'' instead. A single run of the Monte Carlo simulation proceeds as follows:
 
 \begin{enumerate}
 
@@ -209,26 +209,26 @@ We use a Monte Carlo simulation to estimate the difference in expected referenti
 \item Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of
   $C$ is derived from $C$ by assuming normally distributed noise around the
   property degrees in $C$, with a fixed standard deviation for each adjective.
-  The probability of obtaining a subjective representation $C^X$ from actual
+  The probability of obtaining a subjective representation $C^X$ from the actual
   context $C$ is
   \begin{align*}
     P(C^X \mid C) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij}^X \mid \mu = C_{ij}, \sigma = \sigma_j)\,.
   \end{align*}
   The standard deviations $\sigma_{1,2}$ are obtained by sampling two numbers
   uniformly from the interval $[0;0.5]$ and assigning the higher number to the
-  more subjective adjective (``tall''), the lower to the less subjective
+  more subjective adjective (``tall'') and the lower number to the less subjective
   adjective (``brown'').
 
 \item A \emph{semantic threshold} $\theta \sim \mathcal{U}(0,1)$ is sampled
   uniformly at random from the unit interval. We apply the context-dependent
-  threshold semantics in \eqref{eq:Semantics} of \citeA{schmidtetal2009} with
-  the sequentially intersective context update in
+  threshold semantics in \eqref{eq:Semantics} from \citeA{schmidtetal2009} with
+  the incrementally intersective context update in
   \eqref{eq:SequentialInterpretation}, using each agent's subjective context
   representation, to yield each agent's subjective interpretation of each
   referential phrase.\footnote{In this way, the actual context $C$ plays no role
-    in the assignment of ``subjective truth conditions''. It is just a means of
+    in the assignment of subjective truth conditions; $C$ is just a means of
     efficiently sampling subjective context representations that are more or
-    less aligned with each other.}
+    less aligned with each other. \gcs{I'm not sure I understand what you're trying to say here.}}
   % The denotation $\sem{adj\textsubscript{j}}^{C}$ of adjective $j \in \{1,2\}$
   % relative to some context $C$ (actual or subjective; possibly further
   % restricted by previous adjectival modification) is the set of all objects
@@ -253,9 +253,9 @@ We use a Monte Carlo simulation to estimate the difference in expected referenti
 
 \section{Results}
 
-Based on $10^5$ Monte Carlo samples from the process outline above, we estimate the expected probability of recovering the speaker's intended referent based on the ordering ``big brown bag'' as \rlgetvariable{EU_big_brown}, compared to \rlgetvariable{EU_brown_big} for the ordering ``brown big bag''. The obtained samples of expected utilities for each ordering appear to be different indeed (paired $t$-test, $t \approx \rlgetvariable{Tstatistic}$, $p < 10e^{80}$). This lends credence to the general idea that, on average, the ordering of adjectives by subjectivity does affect average referential success and that using the less subjective adjective early in sequential interpretation is communicatively beneficial.
+Based on $10^5$ Monte Carlo samples from the process outlined above, we estimate the expected probability of recovering the speaker's intended referent with the subjectivity-based ordering ``big brown bag'' as \rlgetvariable{EU_big_brown}, compared to \rlgetvariable{EU_brown_big} for the reverse ordering ``brown big bag''. The obtained samples of expected utilities for each ordering appear to indeed be different  (paired $t$-test, $t \approx \rlgetvariable{Tstatistic}$, $p < 10e^{80}$). This direction of this difference lends credence to the general idea that, on average,  ordering adjectives by subjectivity does affect average referential success, and that using the less subjective adjective early in sequential interpretation is communicatively beneficial. In other words, ordering adjectives with respect to decreasing subjectivity increases the probability of communicative success.
 
-To understand these results better, Figure~\ref{fig:Showcase_examples} shows results from Monte Carlo simulations for a small selection of fixed parameter values. We investigate values for standard deviations $\sigma_{\text{brown}} \in \{0.1, 0.2\}$ and $\sigma_{\text{big}} \in \{0.25, 0.3\}$ for the subjective representations of agents and semantic threshold values $\theta \in \{ 0.2, 0.4, 0.6, 0.8 \}$. For each combination of these values, we ran 10,000 simulations otherwise following the procedure outlined above. The vertical axis in Figure~\ref{fig:Showcase_examples} plots two measure. Upward from the 0-mark is the difference in mean communicative success between ``big brown bag'' and ``brown big bag''. We see that all mean values are positive, which means that for all parameter constellation picked out here, the phrase ``big brown bag'' was indeed estimated to be communicatively more successful in each case. Below the 0-mark in Figure~\ref{fig:Showcase_examples} we see the percentage of simulation runs in which the reverse ordering sequence ``brown big bag'' had a higher expected utility. This shows that the communicative advantage of one adjective ordering over another is not absolute. There are exceptions. However, when averaging over all cases there is nonetheless a clear communicative benefit of ``big brown bag'' over ``brown big bag''.
+To understand these results better, Figure~\ref{fig:Showcase_examples} shows results from Monte Carlo simulations for a small selection of fixed parameter values. We investigate values for standard deviations $\sigma_{\text{brown}} \in \{0.1, 0.2\}$ and $\sigma_{\text{big}} \in \{0.25, 0.3\}$ for the subjective representations of agents; we consider semantic threshold values $\theta \in \{ 0.2, 0.4, 0.6, 0.8 \}$. For each combination of these values, we ran 10,000 simulations following the procedure outlined above. The vertical axis in Figure~\ref{fig:Showcase_examples} plots two measure. Upward from the 0-mark is the difference in mean communicative success between ``big brown bag'' and ``brown big bag''. We see that all mean values are positive, which means that for all parameter constellations picked out here, the phrase ``big brown bag'' was indeed estimated to be communicatively more successful in each case. Below the 0-mark in Figure~\ref{fig:Showcase_examples}, we see the percentage of simulation runs in which the reverse ordering sequence ``brown big bag'' had a higher expected utility. This shows that the communicative advantage of one adjective ordering over another is not absolute: there are exceptions. However, when averaging over all cases, there is nonetheless a clear communicative benefit of ``big brown bag'' over ``brown big bag''.
 
 \begin{figure}
   \centering
@@ -264,30 +264,32 @@ To understand these results better, Figure~\ref{fig:Showcase_examples} shows res
   \label{fig:Showcase_examples}
 \end{figure}
 
-We also investigated the results from the (unconstrained) Monte Carlo simulation to learn about systematic influences of the model's parameters on the obtained results. Towards this end, we used a linear regression model, regressing the difference in expected utility between ``big brown bag'' and ``brown big bag'' is each simulated context against factors $n_{\text{ob}}$ (number of objects in context), $\theta$ (semantic threshold), and $\sigma_{\text{diff}}$ (difference $\sigma_{\text{big}} - \sigma_{\text{brown}}$), as well as all of their interactions. We then used iterated deletion of factors, following model comparison based on AICs, to determine the simplest factor structure relevant for explaining the predicted measure. The resulting, simplified model contained the factors listed in Table~\ref{tab:RegressionResults}, which also shows its estimates. These results indicate that all main factors except $\sigma_{\text{diff}}$ seem to influence the difference in expected utilities. The more objects in context, the less difference we expect; similarly for higher values of semantic threshold $\theta$. The latter, as such, may seem surprising but it is attenuated by the significant interaction terms where higher values of $\theta$ make us predict higher differences in expected utility when both $n_{\text{onj}}$ and $\sigma_{\text{diff}}$ are also high. Evidence for the latter interaction can also be seen in Figure~\ref{fig:Showcase_examples} where the effect of increasing $\theta$ is most pronounced in the upper right quadrant where$\sigma_{\text{diff}}$ is highest. \mf{I don't think that any of this is particularly interesting; feels like doing homework for a bad class; does anyone see anything more interesting in these results? or should we skip it altogether?}
+We also investigated the results from the (unconstrained) Monte Carlo simulation to learn about systematic influences of the model's parameters on the obtained results. We used a linear regression model, regressing the difference in expected utility between ``big brown bag'' and ``brown big bag'' in each simulated context against factors $n_{\text{obj}}$ (number of objects in context), $\theta$ (semantic threshold), and $\sigma_{\text{diff}}$ (difference $\sigma_{\text{big}} - \sigma_{\text{brown}}$), as well as all of their interactions. We then used the iterated deletion of factors, following model comparison based on AICs, to determine the simplest factor structure relevant for explaining the predicted measure. The resulting, simplified model contained the factors listed in Table~\ref{tab:RegressionResults}, which also shows the model estimates. These results indicate that all main factors except $\sigma_{\text{diff}}$ seem to influence the difference in expected utilities. The more objects in context, the less difference we expect; similarly for higher values of semantic threshold $\theta$. These effects are not immediately apparent in the subset of results we plot in Figure \ref{fig:Showcase_examples}, but both effects are attenuated by the significant interaction terms: higher values of $\theta$ lead to higher differences in expected utility when both $n_{\text{obj}}$ and $\sigma_{\text{diff}}$ are also high. Evidence for both interactions can be seen in Figure~\ref{fig:Showcase_examples}, where the effect of increasing $\theta$ increases with increasing the number of object and the effect of increasing $\theta$ is most pronounced in the upper right quadrant when $\sigma_{\text{diff}}$ is highest. \mf{I don't think that any of this is particularly interesting; feels like doing homework for a bad class; does anyone see anything more interesting in these results? or should we skip it altogether?} \gcs{if we've got the space, I think it's fine to include. it shows that we at least did our homework}
 
 
-\begin{table}[h]
-    \centering \footnotesize
-
-    \pgfplotstabletypeset[sci zerofill,
-    col sep = comma,
-    every head row/.style={before row = \toprule, after row = \midrule},
-    every last row/.style={after row = \bottomrule},
-    columns/Rowname/.style={string type, column name={}, column type = l},
-    columns/Estimate/.style={column name={Estimate}, dec sep align},
-    % columns/Std. Error/.style={column name={SDE}, sci sep align, sci},
-    columns/t value/.style={column name={$t$-value}, dec sep align},
-    columns/Pr(>|t|)/.style={column name={$p$-value}, dec sep align },
-    columns/sign/.style={string type, column name={}, column type = l},]
-    {R_data_4_TeX/regression_results.csv}
-
-    \caption{Estimates of coefficients of the simplified regression model.}
-    \label{tab:RegressionResults}
-  \end{table}
+%\begin{table}[h]
+%    \centering \footnotesize
+%
+%    \pgfplotstabletypeset[sci zerofill,
+%    col sep = comma,
+%    every head row/.style={before row = \toprule, after row = \midrule},
+%    every last row/.style={after row = \bottomrule},
+%    columns/Rowname/.style={string type, column name={}, column type = l},
+%    columns/Estimate/.style={column name={Estimate}, dec sep align},
+%    % columns/Std. Error/.style={column name={SDE}, sci sep align, sci},
+%    columns/t value/.style={column name={$t$-value}, dec sep align},
+%    columns/Pr(>|t|)/.style={column name={$p$-value}, dec sep align },
+%    columns/sign/.style={string type, column name={}, column type = l},]
+%    {R_data_4_TeX/regression_results.csv}
+%
+%    \caption{Estimates of coefficients of the simplified regression model.}
+%    \label{tab:RegressionResults}
+%  \end{table}
 
 
 \section{Discussion}
+
+The results of our simulation suggest that a simple, empirically-motivated adjective semantics can lead to increased communicative success when multi-adjective strings are ordered with respect to decreasing subjectivity.
 
 \mf{some thoughts}
 
