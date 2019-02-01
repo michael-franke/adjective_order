@@ -77,6 +77,38 @@ Dixon, R\BPBI M\BPBI W.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Eberhard%
+, Spivey-Knowlton%
+, Sedivy%
+\BCBL {}\ \BBA {} Tanenhaus%
+}{%
+Eberhard%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1995}}%
+}]{%
+eberhardetal1995}
+\APACinsertmetastar {%
+eberhardetal1995}%
+\begin{APACrefauthors}%
+Eberhard, K\BPBI M.%
+, Spivey-Knowlton, M\BPBI J.%
+, Sedivy, J\BPBI C.%
+\BCBL {}\ \BBA {} Tanenhaus, M\BPBI K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1995}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Eye Movements as a Window into Real-Time Spoken Language
+  Comprehension in Natural Contexts} {Eye movements as a window into real-time
+  spoken language comprehension in natural contexts}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Psycholinguistic Research}{24}{6}{409-436}.
+\newblock
+\begin{APACrefDOI} \doi{10.1007/BF02143160} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Franke%
 \ \BBA {} J{\"{a}}ger%
 }{%
@@ -488,6 +520,38 @@ Scott, G\BHBI J.%
   and IP}}\ (\BPGS\ 91--120).
 \newblock
 \APACaddressPublisher{Oxford}{Oxford University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Sedivy%
+, Tanenhaus%
+, Chambers%
+\BCBL {}\ \BBA {} Carlson%
+}{%
+Sedivy%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1999}}%
+}]{%
+sedivyetal1999}
+\APACinsertmetastar {%
+sedivyetal1999}%
+\begin{APACrefauthors}%
+Sedivy, J\BPBI C.%
+, Tanenhaus, M\BPBI K.%
+, Chambers, C\BPBI G.%
+\BCBL {}\ \BBA {} Carlson, G\BPBI N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1999}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Achieving incremental semantic interpretation through
+  contextual representation} {Achieving incremental semantic interpretation
+  through contextual representation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Cognition}{71}{}{109-147}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/S0010-0277(99)00025-6} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
