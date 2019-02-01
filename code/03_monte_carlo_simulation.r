@@ -4,7 +4,7 @@ source("01_referential_success_k-percent_semantics.r")
 
 ## number of samples to take
 # careful! this is `n_samples` samples per 9 combinations of distribution types
-n_samples = 10000 
+n_samples = 100000
 
 out = map_df(1:n_samples, function(i) {
   
@@ -15,26 +15,28 @@ out = map_df(1:n_samples, function(i) {
   sd_tall = max(sd_adjs) 
   theta = runif(1, 0, 1)
   
-  rbind(
-    get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-                       dist_brown = open, dist_tall = open, short_output = F),
-    get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-                       dist_brown = open, dist_tall = closed, short_output = F),
-    # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-    #                    dist_brown = open, dist_tall = half_open, short_output = F),
-    get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-                       dist_brown = closed, dist_tall = open, short_output = F),
-    get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-                       dist_brown = closed, dist_tall = closed, short_output = F)
-    # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-    #                    dist_brown = closed, dist_tall = half_open, short_output = F),
-    # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-    #                    dist_brown = half_open, dist_tall = open, short_output = F),
-    # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-    #                    dist_brown = half_open, dist_tall = closed, short_output = F),
-    # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
-    #                    dist_brown = half_open, dist_tall = half_open, short_output = F)
-  )
+  # rbind(
+  #   get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #                      dist_brown = open, dist_tall = open, short_output = F),
+  #   get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #                      dist_brown = open, dist_tall = closed, short_output = F),
+  #   # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #   #                    dist_brown = open, dist_tall = half_open, short_output = F),
+  #   get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #                      dist_brown = closed, dist_tall = open, short_output = F),
+  #   get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #                      dist_brown = closed, dist_tall = closed, short_output = F)
+  #   # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #   #                    dist_brown = closed, dist_tall = half_open, short_output = F),
+  #   # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #   #                    dist_brown = half_open, dist_tall = open, short_output = F),
+  #   # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #   #                    dist_brown = half_open, dist_tall = closed, short_output = F),
+  #   # get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+  #   #                    dist_brown = half_open, dist_tall = half_open, short_output = F)
+  # )
+  get_single_outcome(n_obj = n_obj, sd_brown = sd_brown, sd_tall = sd_tall, theta = theta, 
+                     dist_brown = open, dist_tall = open, short_output = F)
 })  %>% filter(! is.na(referent))
 
 write_csv(x = out, path = "03_mc_results.csv")

@@ -204,7 +204,18 @@ We use a Monte Carlo simulation to estimate the difference in expected referenti
 
 \section{Results}
 
-The results are insane!
+Based on $10^5$ Monte Carlo samples from the process outline above, we estimate the expected probability of recovering the speaker's intended referent based on the ordering ``big brown bag'' as $0.77$, compared to $0.71$ for the ordering ``brown big bag''. \mf{gather more data; provide some kind of interval estimate (bootstrapped CI or some such)?} This lends credence to the general idea that, on average, the ordering of adjectives by subjectivity does affect average referential success and that using the less subjective adjective early in sequential interpretation is communicatively beneficial.
+
+\mf{regression results}
+
+To understand these results better, Figure~\ref{fig:Showcase_examples} shows results from Monte Carlo simulations for a small selection of fixed parameter values. We investigate values for standard deviations $\sigma_{\text{brown}} \in \{0.1, 0.2\}$ and $\sigma_{\text{big}} \in \{0.25, 0.3\}$ for the subjective representations of agents and semantic threshold values $\theta \in \{ 0.2, 0.4, 0.6, 0.8 \}$. For each combination of these values, we ran 10,000 simulations otherwise following the procedure outlined above. The vertical axis in Figure~\ref{fig:Showcase_examples} plots two measure. Upward from the 0-mark is the difference in mean communicative success between ``big brown bag'' and ``brown big bag''. We see that all mean values are positive, which means that for all parameter constellation picked out here, the phrase ``big brown bag'' was indeed estimated to be communicatively more successful in each case. Below the 0-mark in Figure~\ref{fig:Showcase_examples} we see the percentage of simulation runs in which the reverse ordering sequence ``brown big bag'' had a higher expected utility. This shows that the communicative advantage of one adjective ordering over another is not absolute. There are exceptions. However, when averaging over all cases there is nonetheless a clear communicative benefit of ``big brown bag'' over ``brown big bag''.
+
+\begin{figure}
+  \centering
+  \includegraphics[width = \linewidth]{plots/showcase_results_combined.pdf}
+  \caption{Results from a Monte Carlo simulation for a combination of fixed values of $\sigma_{\text{brown}}$, $\sigma_{\text{tall}}$ and $\theta$. Above the 0-mark, the vertical axis shows the mean expected success of ``big brown bag'' minus that of ``brown big bag''. Below the 0-mark it shows the percentage of simulation runs where the latter ordering had a higher (however small) expected success.}
+  \label{fig:Showcase_examples}
+\end{figure}
 
 \bigskip
 \bigskip

@@ -1,6 +1,8 @@
 ---
 title: "Results Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 <!--
@@ -13,6 +15,7 @@ output: html_notebook
 
 ```{r}
 library(scales)
+library(tidyverse)
 selection = read.csv("../results/06_showcase_results.csv") 
 ```
 
@@ -80,11 +83,21 @@ combined_plot = selection %>%
   xlab("number of objects in context")  +
   scale_fill_brewer(palette="Set1", name = "semantic threshold") +
   geom_hline( yintercept = 0) +  scale_y_continuous(breaks = c(-0.2*reverse_scale,-0.1*reverse_scale,0.05,0,0.1,0.2), labels = c("20%","10%","0.05","0","0.1","0.2")) +
-  theme_bw()
+  theme_bw() +
+  theme(legend.position="bottom")
 
 
 show(combined_plot)
 
+
+scale_factor = 0.6
+ggsave(
+  plot = combined_plot, 
+  # this assumes that the CWD is source location!
+  filename = "../writing/2019 CogSci/plots/showcase_results_combined.pdf",
+  height = 7 * scale_factor, 
+  width = 9 * scale_factor
+)
 # geom_col(aes(y = -value2, fill = "Value 2")) 
 ```
 

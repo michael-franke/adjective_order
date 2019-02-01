@@ -1,6 +1,6 @@
 source("01_referential_success_k-percent_semantics.r", encoding="utf-8")
 
-iterations = 5000
+iterations = 10000
 
 data = list(); i = 1;
 for (n in seq(4,20,4)) {

@@ -49,3 +49,4 @@ writing/2019 CogSci/adjective-ordering-CogSci.pdf
 # R markdown
 sandbox
 *.html
+.Rproj.user
