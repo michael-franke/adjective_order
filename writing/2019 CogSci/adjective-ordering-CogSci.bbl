@@ -131,6 +131,42 @@ Goodman, N\BPBI D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Hahn%
+, Degen%
+, Goodman%
+, Jurafsky%
+\BCBL {}\ \BBA {} Futrell%
+}{%
+Hahn%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+hahnetal2018}
+\APACinsertmetastar {%
+hahnetal2018}%
+\begin{APACrefauthors}%
+Hahn, M.%
+, Degen, J.%
+, Goodman, N\BPBI D.%
+, Jurafsky, D.%
+\BCBL {}\ \BBA {} Futrell, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An Information-Theoretic Explanation of Adjective
+  Ordering Preferences} {An information-theoretic explanation of adjective
+  ordering preferences}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 40th Annual Conference of the
+  {C}ognitive {S}cience {S}ociety.} {Proceedings of the 40th annual conference
+  of the {C}ognitive {S}cience {S}ociety.}
+\newblock
+\APACaddressPublisher{London}{Cognitive Science Society}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Hetzron%
 }{%
 Hetzron%
@@ -174,8 +210,8 @@ Hill, F.%
 \APACrefYearMonthDay{2012}{}{}.
 \newblock
 {\BBOQ}\APACrefatitle {Beauty Before Age? {A}pplying Subjectivity to Automatic
-  English Adjective Ordering} {Beauty before age? {A}pplying subjectivity to
-  automatic english adjective ordering}.{\BBCQ}
+  {E}nglish Adjective Ordering} {Beauty before age? {A}pplying subjectivity to
+  automatic {E}nglish adjective ordering}.{\BBCQ}
 \newblock
 \BIn{} \APACrefbtitle {{NAACL HLT 2012 Student Research Workshop}} {{NAACL HLT
   2012 Student Research Workshop}}\ (\BPGS\ 11--16).
@@ -203,10 +239,6 @@ Kennedy, C.%
   and dimensional uncertainty}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Inquiry}{56}{2-3}{258--277}.
-\newblock
-\begin{APACrefURL}
-  \url{http://www.tandfonline.com/doi/abs/10.1080/0020174X.2013.784483}
-  \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1080/0020174X.2013.784483} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
