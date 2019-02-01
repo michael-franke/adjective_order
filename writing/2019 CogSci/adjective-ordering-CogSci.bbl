@@ -77,6 +77,60 @@ Dixon, R\BPBI M\BPBI W.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Franke%
+\ \BBA {} J{\"{a}}ger%
+}{%
+Franke%
+\ \BBA {} J{\"{a}}ger%
+}{%
+{\protect \APACyear {2016}}%
+}]{%
+FrankeJager2015:Probabilistic-p}
+\APACinsertmetastar {%
+FrankeJager2015:Probabilistic-p}%
+\begin{APACrefauthors}%
+Franke, M.%
+\BCBT {}\ \BBA {} J{\"{a}}ger, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Probabilistic pragmatics, or why Bayes' rule is probably
+  important for pragmatics} {Probabilistic pragmatics, or why bayes' rule is
+  probably important for pragmatics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Zeitschrift f\"{u}r Sprachwissenschaft}{35}{1}{3--44}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Goodman%
+\ \BBA {} Frank%
+}{%
+Goodman%
+\ \BBA {} Frank%
+}{%
+{\protect \APACyear {2016}}%
+}]{%
+goodmanfrank2016}
+\APACinsertmetastar {%
+goodmanfrank2016}%
+\begin{APACrefauthors}%
+Goodman, N\BPBI D.%
+\BCBT {}\ \BBA {} Frank, M\BPBI C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Pragmatic Language Interpretation as Probabilistic
+  Inference} {Pragmatic language interpretation as probabilistic
+  inference}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Trends in Cognitive Sciences}{20}{11}{818-829}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Hetzron%
 }{%
 Hetzron%
