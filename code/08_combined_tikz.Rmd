@@ -82,13 +82,16 @@ reverse_scale = 0.25
 combined_plot = selection %>%
   ggplot(aes(x = as.factor(n_obj))) +
   geom_col(aes(y = success, fill = as.factor(theta)), position = "dodge") +
-  geom_col(aes(y = -reverse_scale*proportion_exceptions, fill =
-as.factor(-theta)), position = "dodge") +
-  facet_grid(sd_brown ~ sd_tall) +
+  geom_col(aes(y = -reverse_scale*proportion_exceptions, fill = as.factor(-theta)), position = "dodge") +
+  facet_grid(sd_brown ~ sd_tall, scales="free") +
   ylab("difference in mean success probability  /\n proportion of exceptions") +
   xlab("number of objects in context")  + #scale_fill_brewer(palette="Set1", name = "semantic threshold") +
   geom_hline( yintercept = 0) +
-  scale_y_continuous(breaks = c(-0.2*reverse_scale,-0.1*reverse_scale,0.05,0,0.1,0.2), labels = c("20\\%","10\\%","0.05","0","0.1","0.2")) +
+  expand_limits(y = c(-0.35*reverse_scale,0.18) ) +
+  scale_y_continuous( minor_breaks=c(-0.3*reverse_scale, -0.25*reverse_scale, -0.2*reverse_scale, -0.15*reverse_scale, -0.1*reverse_scale, -0.05*reverse_scale,
+                                     0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175),
+                      breaks = c(-0.3*reverse_scale,-0.2*reverse_scale,-0.1*reverse_scale,0.05,0,0.1,0.15),
+                      labels = c("30\\%", "20\\%","10\\%","0.05","0","0.1","0.15")) +
   scale_fill_manual(values=c("#7a7a7a","#aa8989","#cdcdff","#89aa89","#00aa00","#0000ff","#aa0000","#000000"), breaks = c("0.2", "0.4", "0.6","0.8"), name = "semantic threshold") +
   theme_bw() +
   theme(legend.position="bottom")
@@ -107,15 +110,15 @@ tikz("../writing/2019 CogSci/plots/tikz_combined.tex",standAlone=TRUE, width = 9
 combined_plot
 dev.off()
 
-options(tikzLatexPackages=c(getOption("tikzLatexPackages"),"\\usepackage{fixltx2e} \\usepackage{amsmath}"))
-tikz("../writing/2019 CogSci/plots/tikz_success.tex",standAlone=TRUE, width = 9 * scale_factor, height = 7 * scale_factor)
-results_plot
-dev.off()
+#options(tikzLatexPackages=c(getOption("tikzLatexPackages"),"\\usepackage{fixltx2e} \\usepackage{amsmath}"))
+#tikz("../writing/2019 CogSci/plots/tikz_success.tex",standAlone=TRUE, width = 9 * scale_factor, height = 7 * scale_factor)
+#results_plot
+#dev.off()
 
-options(tikzLatexPackages=c(getOption("tikzLatexPackages"),"\\usepackage{fixltx2e} \\usepackage{amsmath}"))
-tikz("../writing/2019 CogSci/plots/tikz_exceptions.tex",standAlone=TRUE, width = 9 * scale_factor, height = 7 * scale_factor)
-exceptions_plot 
-dev.off()
+#options(tikzLatexPackages=c(getOption("tikzLatexPackages"),"\\usepackage{fixltx2e} \\usepackage{amsmath}"))
+#tikz("../writing/2019 CogSci/plots/tikz_exceptions.tex",standAlone=TRUE, width = 9 * scale_factor, height = 7 * scale_factor)
+#exceptions_plot 
+#dev.off()
 
 ```
 
