@@ -129,9 +129,9 @@ Franke, M.%
 \newblock
 \APACrefYearMonthDay{2016}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {Probabilistic pragmatics, or why Bayes' rule is probably
-  important for pragmatics} {Probabilistic pragmatics, or why bayes' rule is
-  probably important for pragmatics}.{\BBCQ}
+{\BBOQ}\APACrefatitle {Probabilistic pragmatics, or why {B}ayes' rule is
+  probably important for pragmatics} {Probabilistic pragmatics, or why {B}ayes'
+  rule is probably important for pragmatics}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Zeitschrift f\"{u}r Sprachwissenschaft}{35}{1}{3--44}.
 \PrintBackRefs{\CurrentBib}
