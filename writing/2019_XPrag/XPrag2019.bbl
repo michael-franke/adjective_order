@@ -1,0 +1,120 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Schmidt%
+, Goodman%
+, Barner%
+\BCBL {}\ \BBA {} Tenenbaum%
+}{%
+Schmidt%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+schmidtetal2009}
+\APACinsertmetastar {%
+schmidtetal2009}%
+\begin{APACrefauthors}%
+Schmidt, L\BPBI A.%
+, Goodman, N\BPBI D.%
+, Barner, D.%
+\BCBL {}\ \BBA {} Tenenbaum, J\BPBI B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {How Tall Is \emph{tall}? {C}ompositionality, Statistics,
+  and Gradable Adjectives} {How tall is \emph{tall}? {C}ompositionality,
+  statistics, and gradable adjectives}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 31st annual conference of the
+  {Cognitive Science Society}.} {Proceedings of the 31st annual conference of
+  the {Cognitive Science Society}.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Scontras%
+, Degen%
+\BCBL {}\ \BBA {} Goodman%
+}{%
+Scontras%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+scontrasetal2017adjectives}
+\APACinsertmetastar {%
+scontrasetal2017adjectives}%
+\begin{APACrefauthors}%
+Scontras, G.%
+, Degen, J.%
+\BCBL {}\ \BBA {} Goodman, N\BPBI D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Subjectivity predicts adjective ordering preferences}
+  {Subjectivity predicts adjective ordering preferences}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Open Mind: Discoveries in Cognitive
+  Science}{1}{1}{53-65}.
+\newblock
+\begin{APACrefDOI} \doi{10.1162/opmi_a_00005} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Scontras%
+, Degen%
+\BCBL {}\ \BBA {} Goodman%
+}{%
+Scontras%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {to appear}}%
+}]{%
+scontrasetalSPadjectives}
+\APACinsertmetastar {%
+scontrasetalSPadjectives}%
+\begin{APACrefauthors}%
+Scontras, G.%
+, Degen, J.%
+\BCBL {}\ \BBA {} Goodman, N\BPBI D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{to appear}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {On the grammatical source of adjective ordering
+  preferences} {On the grammatical source of adjective ordering
+  preferences}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Semantics and Pragmatics}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Simoni\v{c}%
+}{%
+Simoni\v{c}%
+}{%
+{\protect \APACyear {2018}}%
+}]{%
+simonic2018}
+\APACinsertmetastar {%
+simonic2018}%
+\begin{APACrefauthors}%
+Simoni\v{c}, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2018}.
+\unskip\
+\newblock
+\APACrefbtitle {Functional explanation of adjective ordering preferences using
+  probabilistic programming} {Functional explanation of adjective ordering
+  preferences using probabilistic programming}\ \APACtypeAddressSchool
+  {\BUMTh}{}{}.
+\unskip\
+\newblock
+\APACaddressSchool {}{University of T\"{u}bingen}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

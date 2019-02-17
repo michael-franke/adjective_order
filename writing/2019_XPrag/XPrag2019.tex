@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin={1in},vmargin={1in},foot={.6in}]{geometry}   
+\geometry{letterpaper}              
+\usepackage{color,graphicx}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{varioref}
+\usepackage{textcomp}
+\usepackage{textcomp}
+\usepackage{mflogo}
+\usepackage{wasysym}
+\usepackage[normalem]{ulem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{linguex}
+\usepackage{apacite}
+\usepackage{qtree}
+\qtreecenterfalse
+
+\newcommand{\HRule}{\rule{\linewidth}{0.25mm}}
+
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{plain} % options: empty , plain , fancy
+\lhead{}\chead{}\rhead{}
+\renewcommand{\headrulewidth}{.5pt}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+\newcommand{\txtp}{\textipa}
+\renewcommand{\rm}{\textrm}
+\newcommand{\sem}[1]{\mbox{$[\![$#1$]\!]$}}
+\newcommand{\den}[1]{\ensuremath{[\![#1]\!]}}
+\newcommand{\lam}{$\lambda$}
+\newcommand{\lan}{$\langle$}
+\newcommand{\ran}{$\rangle$}
+\newcommand{\type}[1]{\ensuremath{\left \langle #1 \right \rangle }}
+
+\newcommand{\bex}{\begin{exe}}
+\newcommand{\eex}{\end{exe}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+
+\newcommand{\gcs}[1]{\textcolor{blue}{[gcs: #1]}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for R_eproducible_LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+% \usepackage{siunitx}
+
+% set the name of the folder in which the CSV files with 
+% information from R is stored
+\newcommand{\datafoldername}{../2019_CogSci/R_data_4_TeX}
+
+% the following code defines the convenience functions
+% as described in the main text below
+
+% rlgetvalue returns whatever is the in cell of the CSV file
+% be it string or number; it does not format anything
+\newcommand{\rlgetvalue}[4]{\csvreader[filter strcmp={\mykey}{#3},
+	late after line = {{,}\ }, late after last line = {{}}]
+	{\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\myvalue}}
+
+% rlgetvariable is a shortcut for a specific CSV file (myvars.csv) in which
+% individual variables that do not belong to a larger chunk can be stored
+\newcommand{\rlgetvariable}[1]{\csvreader[]{\datafoldername/myvars.csv}{#1=\myvar}{\myvar}\xspace}
+
+% % rlnum format a decimal number
+% \newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
+
+% \newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
+%                           scientific-notation = true,
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
+
+% \newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
+
+% \newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\thispagestyle{plain}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{0.5pt}
+\setlength{\belowdisplayskip}{0.5pt}
+
+%\maketitle
+
+\begin{center}
+	\textbf{The evolutionary pressure for subjectivity-based adjective ordering preferences}
+\end{center}
+
+\vspace{-9pt}
+
+\noindent 
+When speakers use two or more adjectives to modify a noun, they exhibit robust preferences in the relative order of the adjectives (e.g., \emph{big brown bag} vs.~\emph{brown big bag}). Using a series of behavioral and corpus experiments, \citeA{scontrasetal2017adjectives} demonstrated that adjective order in multi-adjective strings is reliably predicted by the subjectivity of the adjectives involved: less subjective adjectives are preferred closer to the modified noun. But why should subjectivity play the role it does in adjective ordering? 
+%In certain cases of incremental restrictive modification, adjectives that compose with the nominal later will classify a smaller set of potential referents (e.g., the set of bags vs. the set of brown bags). 
+We demonstrate that, in order to avoid alignment errors where a listener might mis-characterize the intended referent, it is a better strategy to introduce the more error-prone (i.e., more subjective) adjectives later in the hierarchical meaning composition; the structure linearizes such that subjectivity decreases the closer you get to the modified noun. We build on the work that precedes ours by making minimal assumptions about online processing (cf.~\citeNP{scontrasetalSPadjectives}) and by assuming a more principled implementation of adjective subjectivity within an empirically-motivated semantics (cf.~\citeNP{simonic2018}).
+
+For adjective semantics, we follow \shortciteA{schmidtetal2009} in assuming a contextually-set threshold approach: any object that falls within the top $k\%$ of the range of degrees in context $C$ counts as holding the gradable property in $C$. For example, the set $\den{\text{tall}}^C$ of objects in $C$ that count as tall in $C$ is (where $\texttt{tall}(o)$ is the tallness of object $o$, \texttt{max} is the tallness of the tallest object in $C$, and \texttt{min} that of the smallest):
+\begin{equation}
+\label{eq:Semantics}
+\den{\text{tall}}^C  = \ \{ o \in C \mid \texttt{tall}(o) \ge \texttt{max} - \theta \cdot (\texttt{max} - \texttt{min}) \} \,,  \text{ where $\theta = \nicefrac{k}{100}$.} 
+\end{equation}
+Importantly, \shortciteA{schmidtetal2009} demonstrate that the semantics in \ref{eq:Semantics} is the simplest, best-performing model for predicting human judgments of adjective meaning. 
+%So, if the maximum object height is 10 on the relevant scale and the minimum height is 2, a $k$ of 50\% would set the tallness threshold at 6; that is, an object with a height greater than 6 would count as tall in that context. Notably, the more complex clustering model performed no better than this threshold model when it came to predicting human judgments. We will therefore use this simple but empirically-motivated threshold semantics in the reasoning that follows, treating the threshold $\theta$ as a free model variable.
+Following \citeauthor{simonic2018} and \citeauthor{scontrasetalSPadjectives}, we assume that iterated adjectival modification triggers \emph{sequentially intersective context updates}. Later adjectives (syntactically farther from the noun) are interpreted relative to contexts that are already restricted by previous adjectives. For example, the denotation of ``[adj\textsubscript{i} [adj\textsubscript{j} $N$]]'' given a shared context $C$ of potential referents is:
+\begin{align}
+\label{eq:SequentialInterpretation}
+\den{\text{[adj\textsubscript{i} [adj\textsubscript{j} $N$]]}}^{C} & = \den{\text{adj}_i}^{\den{\text{adj}_j}^{C\cap \den{N}}} 
+\end{align} 
+%In words, a string like ``big brown bag'' characterizes the set of all bags in context $C$ that count as brown (in the set of bags in $C$) and that count as big (in the set of bags that count as brown in the set of bags in $C$). Each adjective is therefore interpreted relative to its local context of incremental compositional semantic interpretation, so to speak. 
+The effect is that adjectives closer to the noun will operate over a larger context (i.e., one that is less restricted); paired with a context-dependent semantics as in \eqref{eq:Semantics}, it is conceivable that the ordering of adjectives matters for referential success.
+
+Adjective subjectivity affects our mental representations---representations that will be relevant to referential communication. Suppose that the speaker and listener share access to a context of four bags that differ only with respect to color and size. Depending on their different perceptual angles, different background knowledge, or differences in previous experiences, the speaker and listener might represent the context differently: their impressions of object size and object color could deviate from the ground truth. 
+Here is where subjectivity comes in: more subjective properties are more likely to lead to deviation between the ground truth (i.e., the true context) and an agent's representation of the property. Crucially, by deviating from the ground truth, these more subjective properties are also more likely to lead to deviations between two agent representations (i.e., between the speaker's and listener's representations); these deviations \emph{and our awareness of their potential} are what lead to perceived subjectivity as measured by a faultless disagreement task. 
+%Language users are aware that their representations might deviate from each other's, and the potential for deviation is different for different properties. We illustrate this tendency in Figure \ref{fig:ModelIllustration}, where the agent representations of size deviate more from the ground truth than their representations of color.
+
+We use a Monte Carlo simulation to estimate the difference in expected referential success between phrases ``big brown bag'' and ``brown big bag''; we calculate this value by averaging over many different contexts with different numbers of objects and varying degrees of subjectivity for the properties involved. 
+%In this way, we are not assuming that agents themselves necessarily reason actively about the stochastic misalignment of semantic judgments, or that they always choose expressions that are optimal with respect to these calculations in each context. We merely compute the average communicative success. 
+A single run of the Monte Carlo simulation proceeds as follows: 
+We first sample a number $n$ of bags in the current context uniformly at random from 4 to 20. 
+We then sample the degree to which each object is brown and the degree to which it is big. Samples are independent draws from a standard normal distribution. This yields a representation of the \emph{actual context} $C$ as an $n \times 2$ matrix of feature values for the $n$ objects. 
+%The probability of sampling context $C$ for fixed $n$ is
+%	\begin{align*}
+%	P(C \mid n) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij} \mid \mu = 0, \sigma = 1)\,.
+%	\end{align*}
+Agent $X$'s (speaker's or listener's) subjective representation $C^X$ of $C$ is derived from $C$ by assuming normally distributed noise around the property degrees in $C$, with a fixed standard deviation for each adjective. 
+%The probability of obtaining a subjective representation $C^X$ from true $C$ is
+%	\begin{align*}
+%	P(C^X \mid C) = \prod_{i=1}^n \prod_{j=1}^2 \mathcal{N}(C_{ij}^X \mid \mu = C_{ij}, \sigma = \sigma_j)\,.
+%	\end{align*}	
+The standard deviations are obtained by sampling two numbers uniformly from the interval $[0;0.5]$ and assigning the higher number to the more subjective (``big'') and the lower to the less subjective adjective (``brown''). 
+A \emph{semantic threshold} $\theta$ is sampled uniformly at random from the unit interval. We apply the context-dependent threshold semantics in \eqref{eq:Semantics} from \citeA{schmidtetal2009} with the incrementally intersective context update in \eqref{eq:SequentialInterpretation}, using each agent's context representation, to yield each agent's subjective interpretation of each referential phrase. We then sample the \emph{speaker-intended referent object} $i^*$ randomly from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$ (i.e., an object that is both brown and big from the point of view of the speaker). If there is no such object, the run is discarded. If the listener's interpretation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' from his subjective point of view is $I = \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$ and 0 otherwise. 
+%We record the probability of recovery for both adjective orders and evaluate their distribution over all samples obtained in this way.
+
+Based on $10^5$ Monte Carlo samples from the process outlined above, we estimate the expected probability of recovering the speaker's intended referent with the subjectivity-based ordering ``big brown bag'' as \rlgetvariable{EU_big_brown}, compared to \rlgetvariable{EU_brown_big} for the reverse ordering ``brown big bag''. The obtained samples of expected utilities for each ordering appear to indeed be different  (paired $t$-test, $t \approx \rlgetvariable{Tstatistic}$, $p < 10e^{80}$). The direction of this difference lends credence to the general idea that, on average,  ordering adjectives by subjectivity does affect referential success, and that using the less subjective adjective early in sequential interpretation is communicatively beneficial. 
+%In other words, ordering adjectives with respect to decreasing subjectivity increases the probability of communicative success.
+The results of our simulation suggest that a simple, empirically-motivated semantics can lead to increased communicative success when multi-adjective strings are ordered with respect to decreasing subjectivity. We thus have an answer for the question of why subjectivity should matter in adjective ordering: ordering adjectives by decreasing subjectivity increases communicative success. 
+%Importantly, we arrive at this conclusion without the potentially controversial assumptions from previous work \cite<cf.>{simonic2018,scontrasetalSPadjectives}. However, our model is not without its own assumptions. In what follows, we revisit the critical assumptions that led to our findings. 
+
+The presence of exceptions suggests that speakers' robust, subjectivity-based adjective ordering preferences arise not out of active rational deliberation about the optimal ordering in context, but rather evolved gradually as speakers increasingly took notice of the communicative successes and failures associated with their utterances. In this way, the communicative pressures that favor subjectivity-based orderings in the majority of cases could have strengthened into the robust preferences we observe today. This sort of reasoning calls into question the nature of our knowledge of these preferences. It seems less likely that speakers represent this knowledge as a subjectivity-based heuristic that gets applied in the construction of multi-adjective strings, and more likely that the knowledge is a reflection of the statistical regularities of our linguistic experience.
+
+\newpage 
+
+{\scriptsize
+\bibliographystyle{apacite} 
+\bibliography{adjOrder}
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
