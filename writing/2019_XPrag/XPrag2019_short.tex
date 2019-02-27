@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[hmargin={1in},vmargin={1in}]{geometry}   
+\geometry{a4}              
+\usepackage{color,graphicx}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{varioref}
+\usepackage{textcomp}
+\usepackage{textcomp}
+\usepackage{mflogo}
+\usepackage{wasysym}
+\usepackage[normalem]{ulem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{linguex}
+\usepackage{apacite}
+\usepackage{qtree}
+\qtreecenterfalse
+
+\newcommand{\HRule}{\rule{\linewidth}{0.25mm}}
+
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{plain} % options: empty , plain , fancy
+\lhead{}\chead{}\rhead{}
+\renewcommand{\headrulewidth}{.5pt}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+\newcommand{\txtp}{\textipa}
+\renewcommand{\rm}{\textrm}
+\newcommand{\sem}[1]{\mbox{$[\![$#1$]\!]$}}
+\newcommand{\den}[1]{\ensuremath{[\![#1]\!]}}
+\newcommand{\lam}{$\lambda$}
+\newcommand{\lan}{$\langle$}
+\newcommand{\ran}{$\rangle$}
+\newcommand{\type}[1]{\ensuremath{\left \langle #1 \right \rangle }}
+
+\newcommand{\bex}{\begin{exe}}
+\newcommand{\eex}{\end{exe}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+
+\newcommand{\gcs}[1]{\textcolor{blue}{[gcs: #1]}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for R_eproducible_LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+% \usepackage{siunitx}
+
+% set the name of the folder in which the CSV files with 
+% information from R is stored
+\newcommand{\datafoldername}{../2019_CogSci/R_data_4_TeX}
+
+% the following code defines the convenience functions
+% as described in the main text below
+
+% rlgetvalue returns whatever is the in cell of the CSV file
+% be it string or number; it does not format anything
+\newcommand{\rlgetvalue}[4]{\csvreader[filter strcmp={\mykey}{#3},
+	late after line = {{,}\ }, late after last line = {{}}]
+	{\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\myvalue}}
+
+% rlgetvariable is a shortcut for a specific CSV file (myvars.csv) in which
+% individual variables that do not belong to a larger chunk can be stored
+\newcommand{\rlgetvariable}[1]{\csvreader[]{\datafoldername/myvars.csv}{#1=\myvar}{\myvar}\xspace}
+
+% % rlnum format a decimal number
+% \newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
+
+% \newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
+%                           scientific-notation = true,
+%                              exponent-product = \cdot,
+%                              round-mode=places,
+%                              round-precision=#2,
+%                              group-digits=false]{#1}}
+
+% \newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
+
+% \newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
+%              late after line = {{,}\ }, late after last line = {{}}]
+%             {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\thispagestyle{plain}
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{0.5pt}
+\setlength{\belowdisplayskip}{0.5pt}
+
+%\maketitle
+
+\begin{center}
+	\textbf{The evolutionary pressure for subjectivity-based adjective ordering preferences}
+\end{center}
+
+\vspace{-5pt}
+
+\noindent 
+There are strong adjective ordering preferences when two or more adjectives are used to modify a noun (e.g., \emph{big brown bag} vs.~\emph{brown big bag}). \citeA{scontrasetal2017adjectives} provide empirical evidence that adjective order in multi-adjective strings is reliably predicted by the subjectivity of the adjectives involved: less subjective adjectives are preferred closer to the modified noun, but the reasons for that finding were not clear. 
+%In certain cases of incremental restrictive modification, adjectives that compose with the nominal later will classify a smaller set of potential referents (e.g., the set of bags vs. the set of brown bags). 
+Following \citeA{scontrasetalSPadjectives} and \citeA{simonic2018}, we demonstrate that, in order to avoid alignment errors where a listener might mischaracterize the intended referent, it is a better strategy to introduce the more subjective adjectives later in the hierarchical meaning composition as they are more error-prone. We build on the observation, that adjective subjectivity affects agents' mental representations of the ground truth. Suppose that the speaker and listener share access to a context of four bags that differ only with respect to color and size. Depending on their perceptual angles, knowledge and experience, the speaker and listener might have different representations of the context. More subjective properties are more likely to lead to deviations between the ground truth and an agent's representation of the property. Crucially, by deviating from the ground truth, these more subjective properties are also more likely to lead to deviations between two agent representations. %Awareness of the different potential for such deviations is measured by the faultless disagreement task, that was utilized to estimate perceived subjectivity of adjectives in \shortciteA{schmidtetal2009}. 
+
+For adjective semantics, we adopt \shortciteA{schmidtetal2009} threshold-based model for predicting human judgements of adjective meaning. Any object that falls within the top $k\%$ of the range of degrees in context $C$ counts as holding the gradable property in $C$. For example, the set $\den{\text{tall}}^C$ of objects in $C$ that count as tall in $C$ are the top $k\%$ tallest objects.
+Following \citeauthor{simonic2018} and \citeauthor{scontrasetalSPadjectives}, we assume that iterated adjectival modification triggers \emph{sequentially intersective context updates}. Adjectives syntactically farther from the noun are interpreted relative to contexts that are already restricted by closer adjectives. For example, the denotation of ``[adj\textsubscript{i} [adj\textsubscript{j} $N$]]'' given a shared context $C$ of potential referents is $\den{\text{[adj\textsubscript{i} [adj\textsubscript{j} $N$]]}}^{C} & = \den{\text{adj}_i}^{\den{\text{adj}_j}^{C\cap \den{N}}}$
+The effect is that adjectives closer to the noun will operate over a larger context (i.e., one that is less restricted); paired with a context-dependent semantics by \shortciteA{schmidtetal2009}, it is conceivable that the ordering of adjectives matters for referential success.
+
+We use a Monte Carlo simulation to estimate the mean difference in expected referential success between phrases with the expected and revered adjective ordering over different contexts. The parameters being sampled are the number objects in the considered context, the subjectivity of the properties, and the semantic threshold. Agent's subjective representation of the context is derived by assuming normally distributed noise around the property degrees for objects in the context with a fixed standard deviation for each adjective.  
+We apply the context-dependent threshold semantics with the incrementally intersective context update, using each agent's context representation, to yield each agent's subjective interpretation of each referential phrase. We then sample the \emph{speaker-intended referent object} $i^*$ randomly from the set $\den{\text{adj}_1}^{C^S} \cap \den{\text{adj}_2}^{C^S}$ (i.e., an object for which both properties hold from speaker's point of view). If there is no such object, the run is discarded. If the listener's interpretation of the phrase ``[adj\textsubscript{i} [adj\textsubscript{j}]]'' from his subjective point of view is $I = \den{\text{[adj\textsubscript{i} [adj\textsubscript{j}]]}}^{C^L}$, the probability of recovering the intended referent is $|I|^{-1}$ if $i^* \in I$ and 0 otherwise. 
+
+Based on the simulation with $10^5$ samples, we estimate the expected probability of recovering the speaker's intended referent with the subjectivity-based ordering (i.e ``big brown bag'') as \textbf{X.XXX}, compared to \textbf{Y.YYY} for the reverse ordering (i.e. ``brown big bag''). The direction of this difference supports the general idea that, on average,  ordering adjectives by subjectivity does affect referential success, and that using the less subjective adjective early in sequential interpretation is communicatively beneficial. 
+%In other words, ordering adjectives with respect to decreasing subjectivity increases the probability of communicative success.
+The results of our simulation suggest that a simple, empirically-motivated semantics can lead to increased communicative success when multi-adjective strings are ordered with respect to decreasing subjectivity. We thus have an answer for the question of why subjectivity should matter in adjective ordering: ordering adjectives by decreasing subjectivity increases communicative success. 
+%Importantly, we arrive at this conclusion without the potentially controversial assumptions from previous work \cite<cf.>{simonic2018,scontrasetalSPadjectives}. However, our model is not without its own assumptions. In what follows, we revisit the critical assumptions that led to our findings. 
+
+%The presence of exceptions suggests that speakers' robust, subjectivity-based adjective ordering preferences arise not out of active rational deliberation about the optimal ordering in context, but rather evolved gradually as speakers increasingly took notice of the communicative successes and failures associated with their utterances. In this way, the communicative pressures that favor subjectivity-based orderings in the majority of cases could have strengthened into the robust preferences we observe today. This sort of reasoning calls into question the nature of our knowledge of these preferences. It seems less likely that speakers represent this knowledge as a subjectivity-based heuristic that gets applied in the construction of multi-adjective strings, and more likely that the knowledge is a reflection of the statistical regularities of our linguistic experience.
+
+{\scriptsize
+\bibliographystyle{apacite} 
+\bibliography{adjOrder}
+}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
