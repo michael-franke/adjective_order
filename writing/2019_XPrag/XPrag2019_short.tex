@@ -112,7 +112,7 @@ There are strong, cross-linguistically attested preferences on the ordering of a
 they modify a noun (e.g., \emph{big brown bag} vs.~ \emph{brown big bag}).
 \cite{scontrasetal2017adjectives} provide empirical evidence that adjective order in
 multi-adjective strings is reliably predicted by the subjectivity of the adjectives involved:
-less subjective adjectives are preferred closer to the modified noun, but the reasons for that
+less subjective adjectives are preferred closer to the modified noun. However, the reasons for that
 finding were not clear. This paper argues for an evolutionary rationale for these ordering
 preferences. Building on \cite{scontrasetalSPadjectives} and \cite{simonic2018}, we argue that
 there is a communicative advantage to ordering adjectives by their subjectivity. The main
@@ -121,14 +121,13 @@ disagreement about whether the adjective applies to a given object or not. There
 minimize coordination error in referential communication, a particular way of ordering
 adjectives is less error prone. We use mathematical modeling to flesh out this basic intuition
 in a novel way, and resort to numerical simulations to demonstrate the intuited difference in
-expected communicative success when averaging over a large number of randomly generated
+expected communicative success when averaging over a large number of randomly-generated
 contexts.
 
 \noindent \textbf{Semantics.} We adopt a context-dependent threshold-based semantics for
-gradable adjectives, of which \cite{schmidtetal2009} showed that it was the simplest highly
-successful predictor of human judgements. The set $\den{\text{tall}}^C$ of objects in context
+gradable adjectives, which \cite{schmidtetal2009} showed was the simplest highly-successful predictor of human judgements. The set $\den{\text{tall}}^C$ of objects in context
 $C$ that count as tall in $C$ are those whose degree of tallness exceeds the threshold $\theta
-= k(\text{tallest}(C) - \text{shortest}(C))$ where ($k$ is a free parameter in our modeling and
+= k(\text{tallest}(C) - \text{shortest}(C))$ (where $k$ is a free parameter in our modeling and
 $\text{tallest}(C)$ / $\text{shortest}(C)$ are the heights of the tallest and shortest elements
 in $C$). Following \cite{scontrasetalSPadjectives} and \cite{simonic2018}, we assume that
 iterated adjectival modification triggers \emph{sequentially intersective context updates}.
@@ -142,7 +141,7 @@ to the noun will operate over a larger context (i.e., one that is less restricte
 \noindent \textbf{Simulations.} We use Monte Carlo simulation to estimate the expected
 referential success, $\text{ES}(o) = \int P(C) \ \text{RefSuc}(ord,C) \ \text{d}C$, of
 different orderings $o$ of adjective sequences when applied across many contexts $C$. We fix
-two properties. One is more subjective than the other. We randomly generate contexts $C$
+two adjectival properties; one is more subjective than the other. We randomly generate contexts $C$
 repeatedly (varying context size, difference in subjectivity etc.). Interlocutors have
 noise-perturbed representations of $C$. The more subjective a property is, the bigger the
 difference to the actual $C$. Interlocutors base their interpretation of phrases on their
