@@ -303,6 +303,33 @@ K{\"{o}}lbel, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Lassiter%
+\ \BBA {} Goodman%
+}{%
+Lassiter%
+\ \BBA {} Goodman%
+}{%
+{\protect \APACyear {2015}}%
+}]{%
+lassitergoodman2015}
+\APACinsertmetastar {%
+lassitergoodman2015}%
+\begin{APACrefauthors}%
+Lassiter, D.%
+\BCBT {}\ \BBA {} Goodman, N\BPBI D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2015}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Adjectival vagueness in a {B}ayesian model of
+  interpretation} {Adjectival vagueness in a {B}ayesian model of
+  interpretation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Synthese}{194}{10}{3801-3836}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 MacFarlane%
 }{%
 MacFarlane%
@@ -373,6 +400,37 @@ McNally, L.%
 \newblock
 \APACjournalVolNumPages{Empirical Issues in Formal Syntax and
   Semantics}{5}{}{179--196}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Qing%
+\ \BBA {} Franke%
+}{%
+Qing%
+\ \BBA {} Franke%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+QingFranke2014:Gradable-Adject}
+\APACinsertmetastar {%
+QingFranke2014:Gradable-Adject}%
+\begin{APACrefauthors}%
+Qing, C.%
+\BCBT {}\ \BBA {} Franke, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Gradable Adjectives, Vagueness, and Optimal Language
+  Use: {A} Speaker-Oriented Model} {Gradable adjectives, vagueness, and optimal
+  language use: {A} speaker-oriented model}.{\BBCQ}
+\newblock
+\BIn{} J.~Grieser, T.~Snider, S.~D'Antonio\BCBL {}\ \BBA {} M.~Wiegand\
+  (\BEDS), \APACrefbtitle {Proceedings of {SALT} 44} {Proceedings of {SALT}
+  44}\ (\BPGS\ 23--41).
+\newblock
+\APACaddressPublisher{}{elanguage.net}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -492,6 +550,32 @@ Scontras, G.%
   preferences}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Semantics and Pragmatics}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Scontras%
+, Tessler%
+\BCBL {}\ \BBA {} Franke%
+}{%
+Scontras%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {{\protect \bibnodate {}}}}%
+}]{%
+ScontrasTessler2018:Probabilistic-L}
+\APACinsertmetastar {%
+ScontrasTessler2018:Probabilistic-L}%
+\begin{APACrefauthors}%
+Scontras, G.%
+, Tessler, M\BPBI H.%
+\BCBL {}\ \BBA {} Franke, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{{\protect \bibnodate {}}}{}{}.
+\newblock
+\APACrefbtitle {Probabilistic language understanding: {A}n introduction to the
+  {R}ational {S}peech {A}ct framework.} {Probabilistic language understanding:
+  {A}n introduction to the {R}ational {S}peech {A}ct framework.}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
