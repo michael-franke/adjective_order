@@ -4,16 +4,17 @@ mc_results = read_csv("03_mc_results.csv") %>%
 
 ## prepare to export to reproducible LaTeX
 myvars = list()
-myvars["nsamples"] = nrwo(mc_results)
-
-
-
+myvars["EU_big_brown"] = mean(mc_results$tall_brown) %>% round(2)
+myvars["EU_brown_big"] = mean(mc_results$brown_tall) %>% round(2)
 
 #print success
 print(paste0("average EU of 'tall brown': ", mean(mc_results$tall_brown) %>% round(4)))
 print(paste0("average EU of 'brown tall': ", mean(mc_results$brown_tall) %>% round(4)))
 
-t.test(mc_results$tall_brown, mc_results$brown_tall)
+x = t.test(mc_results$tall_brown, mc_results$brown_tall)
+myvars["Tstatistic"] = x$statistic %>% round(3)
+myvars["Pvalue"] = x$p.value %>% round(3)
+
 
 
 model_saturated = glm(EU_diff ~ n_obj *  sd_diff * theta,
@@ -44,4 +45,4 @@ readr::write_csv(myTable, path = "../writing/2019 CogSci/R_data_4_TeX/regression
 ## save collected variables
 
 myvars = as_tibble(myvars)
-readr::write_csv(myvars, path = "R_data_4_TeX/myvars.csv", col_names = T)
+readr::write_csv(myvars, path = "../writing/2019 CogSci/R_data_4_TeX/myvars.csv", col_names = T)
